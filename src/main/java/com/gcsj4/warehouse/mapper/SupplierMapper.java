@@ -1,4 +1,4 @@
 package com.gcsj4.warehouse.mapper;
 
-public class SupplierMapper {
+public interface SupplierMapper {
 }
