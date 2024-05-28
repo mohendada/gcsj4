@@ -10,4 +10,3 @@ public class Goods {
     private String goodsPhoto; // 商品图片
     private Integer supplierId; // 供货商编号
 }
-
