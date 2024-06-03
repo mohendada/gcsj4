@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     username: root
-    password: lry20031004
+    password: 1319shuxkmi
     url: jdbc:mysql://localhost:3306/warehouse
   data:
     redis:
@@ -19,3 +19,6 @@ mybatis-plus:
       logic-delete-field: deleted
       logic-not-delete-value: 0
       logic-delete-value: 1
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true

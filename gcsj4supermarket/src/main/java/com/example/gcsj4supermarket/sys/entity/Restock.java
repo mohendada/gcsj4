@@ -1,84 +1,15 @@
 package com.example.gcsj4supermarket.sys.entity;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
+import lombok.Data;
 
-/**
- * <p>
- * 
- * </p>
- *
- * @author li
- * @since 2024-05-27
- */
-public class Restock implements Serializable {
+import java.util.Date;
 
-    private static final long serialVersionUID = 1L;
-
-    private Integer restockId;
-
-    private LocalDateTime restockTime;
-
-    private String restockGoodsName;
-
-    private Integer restockGoodsNumber;
-
-    private Integer supplierId;
-
-    private Integer restockStatue;
-
-    public Integer getRestockId() {
-        return restockId;
-    }
-
-    public void setRestockId(Integer restockId) {
-        this.restockId = restockId;
-    }
-    public LocalDateTime getRestockTime() {
-        return restockTime;
-    }
-
-    public void setRestockTime(LocalDateTime restockTime) {
-        this.restockTime = restockTime;
-    }
-    public String getRestockGoodsName() {
-        return restockGoodsName;
-    }
-
-    public void setRestockGoodsName(String restockGoodsName) {
-        this.restockGoodsName = restockGoodsName;
-    }
-    public Integer getRestockGoodsNumber() {
-        return restockGoodsNumber;
-    }
-
-    public void setRestockGoodsNumber(Integer restockGoodsNumber) {
-        this.restockGoodsNumber = restockGoodsNumber;
-    }
-    public Integer getSupplierId() {
-        return supplierId;
-    }
-
-    public void setSupplierId(Integer supplierId) {
-        this.supplierId = supplierId;
-    }
-    public Integer getRestockStatue() {
-        return restockStatue;
-    }
-
-    public void setRestockStatue(Integer restockStatue) {
-        this.restockStatue = restockStatue;
-    }
-
-    @Override
-    public String toString() {
-        return "Restock{" +
-            "restockId=" + restockId +
-            ", restockTime=" + restockTime +
-            ", restockGoodsName=" + restockGoodsName +
-            ", restockGoodsNumber=" + restockGoodsNumber +
-            ", supplierId=" + supplierId +
-            ", restockStatue=" + restockStatue +
-        "}";
-    }
+@Data
+public class Restock {
+    private Integer restockId; // 进货编号ID
+    private Date restockTime; // 进货时间
+    private String restockGoodsName; // 货品名称
+    private Integer restockGoodsNumber; // 货品数量
+    private Integer supplierId; // 供货商编号
+    private Integer restockStatue; // 订单状态（0：未完成1：已完成）
 }
