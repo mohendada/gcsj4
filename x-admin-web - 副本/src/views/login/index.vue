@@ -26,10 +26,16 @@
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
+      <el-form-item label="验证码:">
+        <el-input v-model="loginForm.code" name="code" prop="code"></el-input>
+      </el-form-item>
+      <div class="login-code" @click="refreshCode">
+        <!--验证码组件-->
+        <s-identify :identifyCode="identifyCode"></s-identify>
+      </div>
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;"
         @click.native.prevent="handleLogin">登录</el-button>
-
       <div class="tips">
         <el-button type="primary" @click="forgot">忘记密码</el-button>
         <el-button type="primary" @click="register">注册</el-button>
@@ -96,10 +102,12 @@
 </template>
 
 <script>
+import SIdentify from '@/components/SIdentify'
 import { validUsername } from '@/utils/validate'
 import login from '@/api/user'
 export default {
   name: 'Login',
+  components: { SIdentify },
   data() {
     var checkAge = (rule, value, callback) => {
       var reg = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/
@@ -122,8 +130,8 @@ export default {
       }
     }
     const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error('密码不能少于6位'))
+      if (value.length < 1) {
+        callback(new Error('密码不能为空'))
       } else {
         callback()
       }
@@ -155,8 +163,14 @@ export default {
         ],
         sex: [
           { required: true, message: '请选择性别', trigger: 'blur' }
+        ],
+        code: [
+
+          { required: true, message: '请选择验证码', trigger: 'blur' }
         ]
       },
+      identifyCodes: '1234567890abcdefjhijklinopqrsduvwxyz', // 随机串内容
+      identifyCode: '',
       forgotFormVisible: false,
       dialogFormVisible: false,
       forgotform: {},
@@ -164,7 +178,8 @@ export default {
       formLabelWidth: '130px',
       loginForm: {
         username: 'admin',
-        password: '123456'
+        password: '123456',
+        code: ''
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -177,13 +192,30 @@ export default {
   },
   watch: {
     $route: {
-      handler: function (route) {
+      handler: function(route) {
         this.redirect = route.query && route.query.redirect
       },
       immediate: true
     }
   },
+  mounted() {
+    // 初始化验证码
+    this.identifyCode = ''
+    this.makeCode(this.identifyCodes, 4)
+  },
   methods: {
+    refreshCode() {
+      this.identifyCode = ''
+      this.makeCode(this.identifyCodes, 4)
+    },
+    makeCode(o, l) {
+      for (let i = 0; i < l; i++) {
+        this.identifyCode += this.identifyCodes[this.randomNum(0, this.identifyCodes.length)]
+      }
+    },
+    randomNum(min, max) {
+      return Math.floor(Math.random() * (max - min) + min)
+    },
     forgotUser() {
       this.forgotFormVisible = false
     },
@@ -227,37 +259,49 @@ export default {
       })
     },
     handleLogin() {
-      this.$refs.loginForm.validate(valid => {
-        if (valid) {
-          this.loading = true
-          console.log(this.loginForm)
-          this.$store.dispatch('user/login', this.loginForm).then((res) => {
-            console.log(res)
+      console.log(this.loginForm.code)
+      if (this.loginForm.code.toLowerCase() !== this.identifyCode.toLowerCase()) {
+        this.$message.error('请填写正确验证码')
+        this.refreshCode()
+      } else {
+        this.$refs.loginForm.validate(valid => {
+          if (valid) {
+            this.loading = true
             console.log(this.loginForm)
-            // 根据角色跳转
-            login.loginuserform(this.loginForm).then(res => {
-              if (res.data.roleId === 1) {
-                this.$router.push({ path: '/aa' })
-              } else if (res.data.roleId === 2) {
-                this.$router.push({ path: this.redirect || '/' })
-              } else {
-                this.$router.push({ path: this.redirect || '/' })
-              }
+            this.$store.dispatch('user/login', this.loginForm).then((res) => {
+              console.log(res)
+              console.log(this.loginForm)
+              // 根据角色跳转
+              login.loginuserform(this.loginForm).then(res => {
+                if (res.data.roleId === 1) {
+                  this.$router.push({ path: '/aa' })
+                } else if (res.data.roleId === 2) {
+                  this.$router.push({ path: this.redirect || '/' })
+                } else {
+                  this.$router.push({ path: this.redirect || '/' })
+                }
+              })
+              this.loading = false
+            }).catch(() => {
+              this.loading = false
             })
-            this.loading = false
-          }).catch(() => {
-            this.loading = false
-          })
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
+          } else {
+            console.log('error submit!!')
+            return false
+          }
+        })
+      }
     }
   }
 }
 </script>
 <style scoped>
+.el-input.yanzhen {
+  border: 2px solid black;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+
 .el-input.custom-input {
   background-color: white;
   border: 2px solid black;
