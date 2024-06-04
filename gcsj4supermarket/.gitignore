@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+## local ignore
+src/main/resources/application-localconf.yml
