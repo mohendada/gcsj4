@@ -33,4 +33,7 @@ public interface GoodsMapper extends BaseMapper<Goods> {
 
     @Delete("delete from goods where goods_Id=#{id}")
     void delete(Integer id);
+
+    @Select("select max(goods_Id) from goods")
+    int selectId();
 }

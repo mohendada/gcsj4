@@ -40,6 +40,8 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
     @Override
     public void insert(Goods goods) {
+        int id = goodsMapper.selectId();
+        goods.setGoodsId(id+1);
         goodsMapper.insert(goods);
     }
 
