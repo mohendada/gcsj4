@@ -29,13 +29,13 @@ import { mapActions } from "vuex";
 export default {
   name: "MyLogin",
   data() {
-    // 用户名的校验方法
+    // 账号名的校验方法
     let validateName = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error("请输入用户名"));
+        return callback(new Error("请输入账号名"));
       }
-      // 用户名以字母开头,长度在5-16之间,允许字母数字下划线
-      const userNameRule = /^[a-zA-Z][a-zA-Z0-9_]{4,15}$/;
+      // 账号名以字母开头,长度在5-16之间,允许字母数字下划线
+      const userNameRule = /^[a-zA-Z][a-zA-Z0-9_]{4,16}$/;
       if (userNameRule.test(value)) {
         this.$refs.ruleForm.validateField("checkPass");
         return callback();
@@ -49,7 +49,7 @@ export default {
         return callback(new Error("请输入密码"));
       }
       // 密码以字母开头,长度在6-18之间,允许字母数字和下划线
-      const passwordRule = /^[a-zA-Z]\w{5,17}$/;
+      const passwordRule = /^[a-zA-Z]\w{5,18}$/;
       if (passwordRule.test(value)) {
         this.$refs.ruleForm.validateField("checkPass");
         return callback();
