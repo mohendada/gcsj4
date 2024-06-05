@@ -75,10 +75,10 @@ public class GoodsController {
      * @return
      */
     @RequestMapping("/Update")
-    public Result<?> updateGoods(@RequestBody Goods goods) {
+    public Result<?> updateGoods(@RequestBody Goods goods,MultipartFile file) {
 
 
-        goodsService.update(goods);
+        goodsService.updateGoods(goods,file);
         return Result.success();
     }
 
@@ -89,7 +89,7 @@ public class GoodsController {
      * @return
      */
     @RequestMapping("/Insert")
-    public Result<?> insertGoods(Goods goods, MultipartFile file) {
+    public Result<?> insertGoods(@RequestBody Goods goods, MultipartFile file) {
 
         log.info("上传文件:{}", file);
         try {

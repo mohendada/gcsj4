@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+
 
 import java.util.List;
 
@@ -23,8 +23,8 @@ public interface OrderMapper extends BaseMapper<Order> {
             "VALUES (#{orderId}, #{orderKind}, #{orderTime}, #{orderStatus}, #{orderName},#{orderNumber},#{orderCreaterId},#{receivingTime})")
     int insert(Order order);
 
-    @Update("update `order` " +
-            "set order_kind=#{orderKind},order_time=#{orderTime},order_status=#{orderStatus},order_name=#{orderName},order_number=#{orderNumber},order_creater_id = #{orderCreaterId},receiving_time = #{receivingTime} where order_id=#{orderId}")
+//    @Update("update `order` " +
+//            "set order_kind=#{orderKind},order_time=#{orderTime},order_status=#{orderStatus},order_name=#{orderName},order_number=#{orderNumber},order_creater_id = #{orderCreaterId},receiving_time = #{receivingTime} where order_id=#{orderId}")
     void update(Order order);
 
     @Select("select max(order_id)from `order`")

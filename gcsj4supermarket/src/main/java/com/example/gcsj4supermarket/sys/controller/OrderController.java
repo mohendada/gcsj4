@@ -102,7 +102,7 @@ public class OrderController {
      * @return
      */
     @RequestMapping("/GetByStatus")
-    public Result<?> GetByStatus(@RequestParam("orderId") Integer status){
+    public Result<?> GetByStatus(@RequestParam("orderStatus") Integer status){
         List<Order> orders = orderService.GetByStatus(status);
         return Result.success(orders);
     }

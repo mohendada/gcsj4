@@ -65,6 +65,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     public void updateStatus(Integer id) {
         Order order = orderMapper.getById(id);
         order.setOrderStatus(order.getOrderStatus()+1);
+        if(order.getOrderStatus()==4){
+            order.setReceivingTime(LocalDateTime.now());
+        }
         orderMapper.update(order);
     }
 

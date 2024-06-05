@@ -4,8 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.gcsj4supermarket.sys.entity.Goods;
 import com.baomidou.mybatisplus.extension.service.IService;
-
-import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>
@@ -30,4 +29,6 @@ public interface IGoodsService extends IService<Goods> {
     void GoodStatus(Integer id);
 
     IPage<Goods> getGoodsPage(Page<Goods> page);
+
+    void updateGoods(Goods goods, MultipartFile file);
 }

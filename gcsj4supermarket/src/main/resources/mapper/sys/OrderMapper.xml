@@ -2,4 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.gcsj4supermarket.sys.mapper.OrderMapper">
 
+    <update id="update" parameterType="com.example.gcsj4supermarket.sys.entity.Order">
+        UPDATE `order`
+        <set>
+            <if test="orderKind != null and orderKind != ''">order_kind = #{orderKind},</if>
+<!--            <if test="orderTime != null">order_time = #{orderTime},</if>-->
+            <if test="orderStatus != null and orderStatus != ''">order_status = #{orderStatus},</if>
+            <if test="orderName != null and orderName != ''">order_name = #{orderName},</if>
+            <if test="orderNumber != null and orderNumber != ''">order_number = #{orderNumber},</if>
+            <if test="orderCreaterId != null and orderCreaterId != '">order_creater_id = #{orderCreaterId},</if>
+<!--            <if test="receivingTime != null">receiving_time = #{receivingTime},</if>-->
+        </set>
+        WHERE order_id = #{orderId}
+    </update>
+
 </mapper>

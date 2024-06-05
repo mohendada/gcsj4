@@ -3,13 +3,17 @@ package com.example.gcsj4supermarket.sys.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.gcsj4supermarket.common.util.AliOssUtil;
 import com.example.gcsj4supermarket.sys.entity.Goods;
 import com.example.gcsj4supermarket.sys.mapper.GoodsMapper;
 import com.example.gcsj4supermarket.sys.service.IGoodsService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
+import java.io.IOException;
+import java.util.UUID;
 
 /**
  * <p>
@@ -19,11 +23,15 @@ import java.util.List;
  * @author li
  * @since 2024-05-27
  */
+@Slf4j
 @Service
 public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements IGoodsService {
 
     @Autowired
     private GoodsMapper goodsMapper;
+
+    @Autowired
+    private AliOssUtil aliOssUtil;
 
 //    @Override
 //    public List<Goods> GetGoodsList() {
@@ -37,7 +45,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
     @Override
     public void update(Goods goods) {
-        goodsMapper.update(goods);
+        goodsMapper.updateGoods(goods);
     }
 
     @Override
@@ -56,11 +64,40 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     @Override
     public void GoodStatus(Integer id) {
         Goods goods = goodsMapper.getGoodsById(id);
+        log.info("修改前{}", goods);
         goods.setGoodsStatus((goods.getGoodsStatus()==1? 0:1));
+        log.info("修改后{}",goods);
+        update(goods);
     }
 
     @Override
     public IPage<Goods> getGoodsPage(Page<Goods> page) {
         return goodsMapper.selectPage(page, null);
+    }
+
+    @Override
+    public void updateGoods(Goods goods, MultipartFile file) {
+
+        if(file!=null) {
+            log.info("上传文件:{}", file);
+            try {
+
+                String originalFilename = file.getOriginalFilename();
+
+                String extension = null;
+
+                if (originalFilename != null) {
+                    extension = originalFilename.substring(originalFilename.lastIndexOf('.'));
+                }
+
+                String objectName = UUID.randomUUID().toString() + extension;
+
+                String filePath = aliOssUtil.upload(file.getBytes(), objectName);
+                goods.setGoodsPhoto(filePath);
+            } catch (IOException e) {
+                log.error("文件上传失败：{}", e);
+            }
+        }
+        update(goods);
     }
 }

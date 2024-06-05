@@ -27,9 +27,9 @@ public interface GoodsMapper extends BaseMapper<Goods> {
     @Select("select * FROM goods WHERE goods_id = #{id}")
     Goods getGoodsById(Integer id);
 
-    @Update("update goods " +
-            "set goods_name=#{goodsName},goods_price=#{goodsPrice},goods_photo=#{goodsPhoto},supplier_id=#{supplierId},goods_status=#{goodsStatus} where goods_Id=#{goodsId}")
-    void update(Goods goods);
+//    @Update("update goods " +
+//            "set goods_name=#{goodsName},goods_price=#{goodsPrice},goods_photo=#{goodsPhoto},supplier_id=#{supplierId},goods_status=#{goodsStatus} where goods_Id=#{goodsId}")
+    void updateGoods(Goods goods);
 
     @Delete("delete from goods where goods_Id=#{id}")
     void delete(Integer id);
