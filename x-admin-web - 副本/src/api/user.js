@@ -39,6 +39,24 @@ export default {
         password: userform.password
       }
     })
+  },
+  forgotfomr(forgotfomr) {
+    return request({
+      url: 'user/forgotfomr',
+      method: 'get',
+      params: {
+        userAccount: forgotfomr.userAccount,
+        phoneNumber: forgotfomr.phoneNumber
+      }
+    })
+  },
+  forgotalter(forgotfomr) {
+    alert(forgotfomr.userAccount)
+    return request({
+      url: 'user/forgotalter',
+      method: 'put',
+      data: forgotfomr
+    })
   }
 }
 

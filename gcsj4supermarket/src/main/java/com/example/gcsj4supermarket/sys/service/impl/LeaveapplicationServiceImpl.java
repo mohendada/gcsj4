@@ -4,6 +4,7 @@ import com.example.gcsj4supermarket.sys.entity.Leaveapplication;
 import com.example.gcsj4supermarket.sys.mapper.LeaveapplicationMapper;
 import com.example.gcsj4supermarket.sys.service.ILeaveapplicationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +17,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class LeaveapplicationServiceImpl extends ServiceImpl<LeaveapplicationMapper, Leaveapplication> implements ILeaveapplicationService {
-
+    @Autowired
+    LeaveapplicationMapper leaveapplicationMapper;
+    @Override
+    public void insertLapp(Leaveapplication leaveapplication) {
+        leaveapplicationMapper.insertnewLapp(leaveapplication);
+    }
 }

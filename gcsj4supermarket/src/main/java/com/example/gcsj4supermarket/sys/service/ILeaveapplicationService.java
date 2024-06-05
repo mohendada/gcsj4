@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2024-05-30
  */
 public interface ILeaveapplicationService extends IService<Leaveapplication> {
-
+    void insertLapp(Leaveapplication leaveapplication);
 }
