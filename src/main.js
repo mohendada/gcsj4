@@ -78,7 +78,6 @@ router.beforeResolve((to, from, next) => {
 });
 
 // 相对时间过滤器,把时间戳转换成时间
-// 格式: 2020-02-25 21:43:23
 Vue.filter('dateFormat', (dataStr) => {
   var time = new Date(dataStr);
   function timeAdd0 (str) {
@@ -105,6 +104,9 @@ import MyLogin from './components/MyLogin';
 Vue.component(MyLogin.name, MyLogin);
 import MyRegister from './components/MyRegister';
 Vue.component(MyRegister.name, MyRegister);
+import MyForget from './components/MyForget';
+Vue.component(MyForget.name, MyForget);
+
 
 Vue.config.productionTip = false;
 

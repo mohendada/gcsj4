@@ -47,7 +47,7 @@
       <div class="content">
         <h1 class="name">{{productDetails.product_name}}</h1>
         <p class="intro">{{productDetails.product_intro}}</p>
-        <p class="store">小米自营</p>
+        <p class="store">老斌超市</p>
         <div class="price">
           <span>{{productDetails.product_selling_price}}元</span>
           <span
@@ -69,19 +69,18 @@
         <!-- 内容区底部按钮 -->
         <div class="button">
           <el-button class="shop-cart" :disabled="dis" @click="addShoppingCart">加入购物车</el-button>
-          <el-button class="like" @click="addCollect">喜欢</el-button>
         </div>
         <!-- 内容区底部按钮END -->
         <div class="pro-policy">
           <ul>
             <li>
-              <i class="el-icon-circle-check"></i> 小米自营
+              <i class="el-icon-circle-check"></i> 优质商品
             </li>
             <li>
-              <i class="el-icon-circle-check"></i> 小米发货
+              <i class="el-icon-circle-check"></i> 顺丰发货
             </li>
             <li>
-              <i class="el-icon-circle-check"></i> 7天无理由退货
+              <i class="el-icon-circle-check"></i> 3天无理由退货
             </li>
             <li>
               <i class="el-icon-circle-check"></i> 7天价格保护
@@ -183,30 +182,6 @@ export default {
           return Promise.reject(err);
         });
     },
-    addCollect() {
-      // 判断是否登录,没有登录则显示登录组件
-      if (!this.$store.getters.getUser) {
-        this.$store.dispatch("setShowLogin", true);
-        return;
-      }
-      this.$axios
-        .post("/api/user/collect/addCollect", {
-          user_id: this.$store.getters.getUser.user_id,
-          product_id: this.productID
-        })
-        .then(res => {
-          if (res.data.code == "001") {
-            // 添加收藏成功
-            this.notifySucceed(res.data.msg);
-          } else {
-            // 添加收藏失败
-            this.notifyError(res.data.msg);
-          }
-        })
-        .catch(err => {
-          return Promise.reject(err);
-        });
-    }
   }
 };
 </script>
@@ -338,15 +313,6 @@ export default {
 }
 #details .main .content .button .shop-cart:hover {
   background-color: #f25807;
-}
-
-#details .main .content .button .like {
-  width: 260px;
-  margin-left: 40px;
-  background-color: #b0b0b0;
-}
-#details .main .content .button .like:hover {
-  background-color: #757575;
 }
 #details .main .content .pro-policy li {
   float: left;

@@ -18,10 +18,6 @@
           <h3>{{item.product_title}}</h3>
           <p>
             <span>{{item.product_selling_price}}元</span>
-            <span
-              v-show="item.product_price != item.product_selling_price"
-              class="del"
-            >{{item.product_price}}元</span>
           </p>
         </router-link>
       </li>
@@ -143,11 +139,6 @@ export default {
   margin: 10px 10px 10px;
   text-align: center;
   color: #ff6700;
-}
-.myList ul li p .del {
-  margin-left: 0.5em;
-  color: #b0b0b0;
-  text-decoration: line-through;
 }
 .myList #more {
   text-align: center;

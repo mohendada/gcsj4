@@ -12,6 +12,8 @@
               <el-button type="text" @click="login">登录</el-button>
               <span class="sep">|</span>
               <el-button type="text" @click="register = true">注册</el-button>
+              <span class="sep">|</span>
+              <el-button type="text" @click="forget = true">找回密码</el-button>
             </li>
             <li v-else>
               欢迎
@@ -26,9 +28,6 @@
             </li>
             <li>
               <router-link to="/order">我的订单</router-link>
-            </li>
-            <li>
-              <router-link to="/collect">我的收藏</router-link>
             </li>
             <li :class="getNum > 0 ? 'shopCart-full' : 'shopCart'">
               <router-link to="/shoppingCart">
@@ -72,6 +71,8 @@
       <MyLogin></MyLogin>
       <!-- 注册模块 -->
       <MyRegister :register="register" @fromChild="isRegister"></MyRegister>
+      <!-- 找回密码模块 -->
+      <MyForget :forget="forget" @fromChild="isForget"></MyForget>
 
       <!-- 主要区域容器 -->
       <el-main>
@@ -87,16 +88,11 @@
           <div class="ng-promise-box">
             <div class="ng-promise">
               <p class="text">
-                <a class="icon1" href="javascript:;">7天无理由退换货</a>
+                <a class="icon1" href="javascript:;">3天无理由退换货</a>
                 <a class="icon2" href="javascript:;">满99元全场免邮</a>
                 <a class="icon3" style="margin-right: 0" href="javascript:;">100%品质保证</a>
               </p>
             </div>
-          </div>
-          <div class="github">
-            <a href="https://github.com/hai-27/vue-store" target="_blank">
-              <div class="github-but"></div>
-            </a>
           </div>
           <div class="mod_help">
             <p>
@@ -106,7 +102,7 @@
               <span>|</span>
               <router-link to="/about">关于我们</router-link>
             </p>
-            <p class="coty">商城版权所有 &copy; 2012-2021</p>
+            <p class="coty">商城版权所有 &copy; 1145-2024</p>
           </div>
         </div>
       </el-footer>
@@ -128,6 +124,7 @@ export default {
       activeIndex: "", // 头部导航栏选中的标签
       search: "", // 搜索条件
       register: false, // 是否显示注册组件
+      forget: false, //是否显示找回密码组件
       visible: false // 是否退出登录
     };
   },
@@ -137,18 +134,6 @@ export default {
       // 如果已经登录，设置vuex登录状态
       this.setUser(JSON.parse(localStorage.getItem("user")));
     }
-    /* window.setTimeout(() => {
-      this.$message({
-        duration: 0,
-        showClose: true,
-        message: `
-        <p>如果觉得这个项目还不错，</p>
-        <p style="padding:10px 0">您可以给项目源代码仓库点Star支持一下，谢谢！</p>
-        <p><a href="https://github.com/hai-27/vue-store" target="_blank">Github传送门</a></p>`,
-        dangerouslyUseHTMLString: true,
-        type: "success"
-      });
-    }, 1000 * 60); */
   },
   computed: {
     ...mapGetters(["getUser", "getNum"])
@@ -198,6 +183,10 @@ export default {
     // 接收注册子组件传过来的数据
     isRegister(val) {
       this.register = val;
+    },
+    // 接收找回密码子组件传过来的数据
+    isForget(val) {
+      this.forget = val;
     },
     // 点击搜索按钮
     searchClick() {
@@ -337,17 +326,6 @@ a:hover {
   line-height: 40px;
   text-decoration: none;
   background: url("./assets/imgs/us-icon.png") no-repeat left 0;
-}
-.footer .github {
-  height: 50px;
-  line-height: 50px;
-  margin-top: 20px;
-}
-.footer .github .github-but {
-  width: 50px;
-  height: 50px;
-  margin: 0 auto;
-  background: url("./assets/imgs/github.png") no-repeat;
 }
 .footer .mod_help {
   text-align: center;
