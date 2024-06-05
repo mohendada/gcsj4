@@ -17,7 +17,7 @@ import java.util.List;
  * 前端控制器
  * </p>
  *
- * @author li
+ * @author Zzuiding
  * @since 2024-05-27
  */
 @RestController
@@ -28,6 +28,12 @@ public class OrderController {
     @Autowired
     private IOrderService orderService;
 
+    /**
+     * 生成订单
+     * @param order (必须字段 kind,name,number,creater_id)
+     * @return
+     */
+
     @RequestMapping("/GenerateOrder")
     public Result<Integer> GenerateOrder(@RequestBody Order order) {
         log.info("controller order: {}", order);
@@ -37,35 +43,64 @@ public class OrderController {
         } else return Result.fail();
     }
 
+    /**
+     * 修改订单信息
+     * @param order
+     * @return
+     */
     @RequestMapping("/UpdateOrder")
     public Result<Integer> UpdateOrder(@RequestBody Order order) {
         orderService.updateOrder(order);
         return Result.success();
     }
 
+    /**
+     * 删除订单
+     * @param id
+     * @return
+     */
     @RequestMapping("/DeleteOrder")
     public Result<Integer> DeleteOrder(@RequestParam("id") Integer id) {
         orderService.delorder(id);
         return Result.success();
     }
 
+    /**
+     * 根据id查询订单
+     * @param id
+     * @return order
+     */
     @RequestMapping("/GetOrderById")
     public Result<Order> GetOrderById(@RequestParam("id") Integer id) {
         return Result.success(orderService.getOrderByid(id));
     }
 
+    /**
+     * 获取所有订单
+     * @return list<order>
+     */
     @RequestMapping("/GetAllOrder")
     public Result<Object> GetAllOrder() {
         List<Order> orders = orderService.GetAllOrders();
         return Result.success(orders);
     }
 
+    /**
+     * 修改订单状态
+     * @param id
+     * @return
+     */
     @RequestMapping("/OrderStatus")
     public Result<?> OrderStatus(@RequestParam("orderId") Integer id){
         orderService.updateStatus(id);
         return Result.success();
     }
 
+    /**
+     * 根据当前状态获取订单信息
+     * @param status
+     * @return
+     */
     @RequestMapping("/GetByStatus")
     public Result<?> GetByStatus(@RequestParam("orderId") Integer status){
         List<Order> orders = orderService.GetByStatus(status);

@@ -1,5 +1,7 @@
 package com.example.gcsj4supermarket.sys.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.gcsj4supermarket.sys.entity.Goods;
 import com.example.gcsj4supermarket.sys.mapper.GoodsMapper;
@@ -23,10 +25,10 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     @Autowired
     private GoodsMapper goodsMapper;
 
-    @Override
-    public List<Goods> GetGoodsList() {
-        return goodsMapper.getGoodsList();
-    }
+//    @Override
+//    public List<Goods> GetGoodsList() {
+//        return goodsMapper.getGoodsList();
+//    }
 
     @Override
     public Goods getGoodsById(Integer id) {
@@ -49,5 +51,16 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     @Override
     public void remove(Integer id) {
         goodsMapper.delete(id);
+    }
+
+    @Override
+    public void GoodStatus(Integer id) {
+        Goods goods = goodsMapper.getGoodsById(id);
+        goods.setGoodsStatus((goods.getGoodsStatus()==1? 0:1));
+    }
+
+    @Override
+    public IPage<Goods> getGoodsPage(Page<Goods> page) {
+        return goodsMapper.selectPage(page, null);
     }
 }

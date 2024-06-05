@@ -17,7 +17,7 @@ import java.util.List;
  * 服务实现类
  * </p>
  *
- * @author li
+ * @author Zzuiding
  * @since 2024-05-27
  */
 @Service
@@ -33,6 +33,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     public int generateOrder(Order order) {
         order.setOrderId(orderMapper.maxId() + 1);
         order.setOrderTime(LocalDateTime.now());
+        order.setOrderStatus(1);
         if (order.getOrderNumber() > storeMapper.selectById(order.getOrderId()).getGoodsNumber()) {
             return -1;
         }
