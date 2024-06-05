@@ -30,4 +30,6 @@ public class Goods implements Serializable {
 
     private Integer supplierId;
 
+    private Integer goodsStatus;
+
 }

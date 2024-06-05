@@ -42,6 +42,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     public void insert(Goods goods) {
         int id = goodsMapper.selectId();
         goods.setGoodsId(id+1);
+//        goods.setGoodsStatus(1);
         goodsMapper.insert(goods);
     }
 

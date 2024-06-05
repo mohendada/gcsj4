@@ -20,7 +20,7 @@ import java.util.List;
 public interface OrderMapper extends BaseMapper<Order> {
 
     @Insert("INSERT INTO `order` (order_id, order_kind, order_time, order_status, order_name, order_number,order_creater_id,receiving_time) " +
-            "VALUES (#{orderId}, #{orderKind}, #{orderTime}, #{orderStatus}, #{orderName},${orderNumber},#{orderCreaterId},#{receivingTime})")
+            "VALUES (#{orderId}, #{orderKind}, #{orderTime}, #{orderStatus}, #{orderName},#{orderNumber},#{orderCreaterId},#{receivingTime})")
     int insert(Order order);
 
     @Update("update `order` " +
@@ -38,4 +38,7 @@ public interface OrderMapper extends BaseMapper<Order> {
 
     @Select("select * from  `order`")
     List<Order> getAllOrders();
+
+    @Select("select * from  `order` where order_status = #{id}")
+    List<Order> GetByStatus(Integer id);
 }

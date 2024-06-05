@@ -24,4 +24,8 @@ public interface IOrderService extends IService<Order> {
     Order getOrderByid(Integer id);
 
     List<Order> GetAllOrders();
+
+    void updateStatus(Integer id);
+
+    List<Order> GetByStatus(Integer status);
 }

@@ -20,15 +20,15 @@ public interface GoodsMapper extends BaseMapper<Goods> {
     @Select("SELECT * FROM goods")
     List<Goods> getGoodsList();
 
-    @Insert("INSERT INTO goods (goods_id, goods_name, goods_price, goods_photo, supplier_id) " +
-            "VALUES (#{goodsId}, #{goodsName}, #{goodsPrice}, #{goodsPhoto}, #{supplierId})")
+    @Insert("INSERT INTO goods (goods_id, goods_name, goods_price, goods_photo, supplier_id, goods_status) " +
+            "VALUES (#{goodsId}, #{goodsName}, #{goodsPrice}, #{goodsPhoto}, #{supplierId},#{goods_status})")
     int insert(Goods goods);
 
     @Select("select * FROM goods WHERE goods_id = #{id}")
     Goods getGoodsById(Integer id);
 
     @Update("update goods " +
-            "set goods_name=#{goodsName},goods_price=#{goodsPrice},goods_photo=#{goodsPhoto},supplier_id=#{supplierId} where goods_Id=#{goodsId}")
+            "set goods_name=#{goodsName},goods_price=#{goodsPrice},goods_photo=#{goodsPhoto},supplier_id=#{supplierId},goods_status=#{goodsStatus} where goods_Id=#{goodsId}")
     void update(Goods goods);
 
     @Delete("delete from goods where goods_Id=#{id}")
