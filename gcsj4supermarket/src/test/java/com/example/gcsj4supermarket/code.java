@@ -13,7 +13,7 @@ public class code {
         String password="lry20031004";
         String moudleName="sys";
         String mapperLocation="D:\\IDEA\\springtest\\gcsj4supermarket\\src\\main\\resources\\mapper\\"+moudleName;
-        String tables="leaveapplication";
+        String tables="user";
         FastAutoGenerator.create(url, username, password)
                 .globalConfig(builder -> {
                     builder.author("li") // 设置作者

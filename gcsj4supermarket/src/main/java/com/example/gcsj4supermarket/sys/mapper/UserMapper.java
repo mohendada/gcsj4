@@ -4,6 +4,7 @@ import com.example.gcsj4supermarket.sys.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * <p>
@@ -16,7 +17,9 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
 
-    @Select("select * from user where user_name=#{username} and password=#{password}")
-    User getuserbyNa(String username,String password);
 
+    @Update("UPDATE user SET password = #{password} WHERE user_Id = #{userId}")
+    int updateById(User user);
+    @Select("select * from user where user_Id = #{userId}")
+    User getuserbyNa(User user);
 }

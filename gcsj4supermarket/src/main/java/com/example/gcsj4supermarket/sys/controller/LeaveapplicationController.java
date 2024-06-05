@@ -49,10 +49,28 @@ public class LeaveapplicationController {
         data.put("rows",page.getRecords());
         return Result.success(data);
     }
+    @GetMapping("/list/name")
+    public Result<Map<String,Object>>getLeaveAppListbyname(@RequestParam(value = "name")String name,
+                                                             @RequestParam("pageNo")Long pageNo,
+                                                             @RequestParam("pageSize")Long pageSize,
+                                                             @RequestParam(value = "approval",required = false)String approval){
+        //分页查询
+        LambdaQueryWrapper<Leaveapplication> wrapper=new LambdaQueryWrapper<>();
+        //name长度是否为0 StringUtils.hasLength(name)
+        wrapper.eq(StringUtils.hasLength(name),Leaveapplication::getApplicant,name);
+        wrapper.eq(StringUtils.hasLength(approval),Leaveapplication::getApproval,approval);
+        Page<Leaveapplication>page=new Page<>(pageNo,pageSize);
+        leaveapplicationService.page(page,wrapper);
+        //放数据
+        Map<String,Object> data=new HashMap<>();
+        data.put("total",page.getTotal());
+        data.put("rows",page.getRecords());
+        return Result.success(data);
+    }
 
     @PostMapping
     public Result<?> addUserLeaveapplication(@RequestBody Leaveapplication leaveapplication){
-        leaveapplicationService.save(leaveapplication);
+        leaveapplicationService.insertLapp(leaveapplication);
         return Result.success("新增申请成功");
     }
     @PutMapping
