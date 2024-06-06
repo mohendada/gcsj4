@@ -40,14 +40,14 @@
       </el-table>
     </el-card>
     <!--分页栏-->
-    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage4"
-      :page-sizes="[5, 8, 10, 20]" :page-size="searchModel.pageSize" layout="total, sizes, prev, pager, next, jumper"
-      :total="total" />
+    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+      :current-page="searchModel.pageNo" :page-sizes="[5, 8, 10, 20]" :page-size="searchModel.pageSize"
+      layout="total, sizes, prev, pager, next, jumper" :total="total" />
     <!--新增请求-->
     <el-dialog :title="tle" :visible.sync="dialogFormVisible" @close="clearForm">
       <el-form ref="applictantformref" :model="applicantform" :rules="rules">
         <el-form-item label="申请人" :label-width="formLabelWidth" prop="applicant">
-          <el-input v-model="applicantform.applicant" autocomplete="off"></el-input>
+          <el-input v-model="applicantform.applicant" autocomplete="off" ></el-input>
         </el-form-item>
         <el-form-item label="开始时间" :label-width="formLabelWidth" prop="btime">
           <el-date-picker v-model="applicantform.btime" type="datetime" placeholder="选择日期时间">
@@ -71,7 +71,13 @@
 </template>
 <script>
 import leaveappApi from '@/api/leapp'
+import { mapGetters } from 'vuex'
 export default {
+  computed: {
+    ...mapGetters([
+      'name'
+    ])
+  },
   data() {
     return {
       tle: '',
@@ -101,7 +107,12 @@ export default {
       value2: '',
       value3: '',
       formLabelWidth: '130px',
-      applicantform: {},
+      applicantform: {
+        applicant: '',
+        btime: '',
+        etime: '',
+        reason: ''
+      },
       dialogFormVisible: false,
       total: 0,
       searchModel: {
@@ -195,7 +206,7 @@ export default {
     },
     getLeaveAppList() {
       /** 调用api/leapp.js的方法 */
-      leaveappApi.getLeaveAppList(this.searchModel).then(res => {
+      leaveappApi.getLeaveAppListbyname(this.searchModel, this.name).then(res => {
         this.applicantlist = res.data.rows
         this.total = res.data.total
       })

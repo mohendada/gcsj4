@@ -20,5 +20,10 @@ public interface IUserService extends IService<User> {
 
     Map<String, Object> getUserInfo(String token);
     User getloginUserInfo(Form form);
+    User getforgotUserInfo(String userAccount,String phoneNumber);
     void logout(String token);
+
+    User getuserbyNa(User user);
+
+    void updatePasswordById(User user);
 }

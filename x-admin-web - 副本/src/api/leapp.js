@@ -29,7 +29,7 @@ export default {
   },
   saveApplication(applicant) {
     // eslint-disable-next-line eqeqeq
-    if (applicant.id == null && applicant == undefined) {
+    if (applicant.id == null) {
       return this.addApplication(applicant)
     } else {
       return this.updateLeaveapplication(applicant)
@@ -45,6 +45,18 @@ export default {
     return request({
       url: '/leaveapplication/' + id,
       method: 'delete'
+    })
+  },
+  getLeaveAppListbyname(searchModel, name) {
+    return request({
+      url: '/leaveapplication/list/name',
+      method: 'get',
+      params: {
+        pageNo: searchModel.pageNo,
+        pageSize: searchModel.pageSize,
+        name: name,
+        approval: searchModel.approval
+      }
     })
   }
 }

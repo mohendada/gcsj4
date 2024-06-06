@@ -93,7 +93,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         LambdaQueryWrapper<User> wrapper=new LambdaQueryWrapper<>();
         wrapper.eq(User::getUserName,user.getUserName());
         wrapper.eq(User::getPassword,user.getPassword());
-        //结果不为空则生成token，
+        User loginUser=this.baseMapper.selectOne(wrapper);
+        return loginUser;
+    }
+
+    @Override
+    public User getforgotUserInfo(String userAccount, String phoneNumber) {
+        LambdaQueryWrapper<User> wrapper=new LambdaQueryWrapper<>();
+        wrapper.eq(User::getUserName,userAccount);
+        wrapper.eq(User::getPhoneNumber,phoneNumber);
         User loginUser=this.baseMapper.selectOne(wrapper);
         return loginUser;
     }
@@ -102,4 +110,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public void logout(String token) {
         redisTemplate.delete(token);
     }
+
+    @Override
+    public User getuserbyNa(User user) {
+        return userMapper.getuserbyNa(user);
+    }
+
+    @Override
+    public void updatePasswordById(User user) {
+        userMapper.updateById(user);
+    }
+
+
 }

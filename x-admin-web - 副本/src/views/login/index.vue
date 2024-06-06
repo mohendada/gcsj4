@@ -42,14 +42,23 @@
       </div>
     </el-form>
     <!--忘记密码-->
-    <el-dialog :visible.sync="forgotFormVisible" @close="clearForm" width="50%">
+    <el-dialog :visible.sync="forgotFormVisible" @close="clearforgotForm" width="50%">
       <template #title>
         <div class="dialog-title">忘记密码</div>
         <div class="forgotlo" style=" text-align: center;color:red;">(请输入用于注册的电话号)</div>
       </template>
       <el-form ref="forgotformref" :model="forgotform" :rules="rules">
-        <el-form-item label="电话号:" :label-width="formLabelWidth" prop="phonenumber" style="background-color: white;">
+        <el-form-item label="账号:" :label-width="formLabelWidth" prop="userAccount" style="background-color: white;">
+          <el-input v-model="forgotform.userAccount" autocomplete="off" class="custom-input" />
+        </el-form-item>
+        <el-form-item label="电话号:" :label-width="formLabelWidth" prop="phoneNumber" style="background-color: white;">
           <el-input v-model="forgotform.phoneNumber" autocomplete="off" class="custom-input" />
+        </el-form-item>
+        <el-form-item label="密码:" :label-width="formLabelWidth" prop="password" style="background-color: white;">
+          <el-input v-model="forgotform.password" autocomplete="off" class="custom-input" type="password" />
+        </el-form-item>
+        <el-form-item label="再次确认:" :label-width="formLabelWidth" prop="password3" style="background-color: white;">
+          <el-input v-model="forgotform.password3" autocomplete="off" class="custom-input" type="password" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -83,7 +92,7 @@
             <el-radio v-model="registrationform.sex" label="Female">女</el-radio>
           </template>
         </el-form-item>
-        <el-form-item label="电话号码:" :label-width="formLabelWidth" prop="phonename" style="background-color: white;">
+        <el-form-item label="电话号码:" :label-width="formLabelWidth" prop="phoneNumber" style="background-color: white;">
           <el-input v-model="registrationform.phoneNumber" autocomplete="off" class="custom-input"></el-input>
         </el-form-item>
         <el-form-item label="电子邮箱:" :label-width="formLabelWidth" prop="email" style="background-color: white;">
@@ -122,6 +131,12 @@ export default {
       }
       callback()
     }
+    var checkPass2 = (rule, value, callback) => {
+      if (value !== this.forgotform.password) {
+        return callback(new Error('密码不一致'))
+      }
+      callback()
+    }
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
         callback(new Error('请输入正确用户名'))
@@ -148,10 +163,14 @@ export default {
           { required: true, message: '请输入密码', trigger: 'blur' },
           { validator: checkPass, trigger: 'blur' }
         ],
+        password3: [
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { validator: checkPass2, trigger: 'blur' }
+        ],
         userName: [
           { required: true, message: '请输入姓名', trigger: 'blur' }
         ],
-        phonenumber: [
+        phoneNumber: [
           { required: true, message: '请输入电话号', trigger: 'blur' }
         ],
         email: [
@@ -173,7 +192,12 @@ export default {
       identifyCode: '',
       forgotFormVisible: false,
       dialogFormVisible: false,
-      forgotform: {},
+      forgotform: {
+        userAccount: '',
+        phoneNumber: '',
+        password: '',
+        password3: ''
+      },
       registrationform: {},
       formLabelWidth: '130px',
       loginForm: {
@@ -217,6 +241,14 @@ export default {
       return Math.floor(Math.random() * (max - min) + min)
     },
     forgotUser() {
+      // 提交后台，验证数据，关闭对话框，刷新数据
+
+      login.forgotalter(this.forgotform).then(res => {
+        this.$message({
+          message: '修改成功',
+          type: 'success'
+        })
+      })
       this.forgotFormVisible = false
     },
     forgot() {
@@ -226,6 +258,11 @@ export default {
       this.registrationform = {}
       // 移除表单项的校验结果清除
       this.$refs.registrationformref.clearValidate()
+    },
+    clearforgotForm() {
+      this.forgotform = {}
+      // 移除表单项的校验结果清除
+      this.$refs.forgotformref.clearValidate()
     },
     saveUser() {
       this.$refs.registrationformref.validate((valid) => {
