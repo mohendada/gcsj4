@@ -57,11 +57,11 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     public Order getOrderByid(Integer id) {
         return orderMapper.getById(id);
     }
-
-    @Override
-    public List<Order> GetAllOrders() {
-        return orderMapper.getAllOrders();
-    }
+//
+//    @Override
+//    public List<Order> GetAllOrders() {
+//        return orderMapper.getAllOrders();
+//    }
 
     @Override
     public void updateStatus(Integer id) {
