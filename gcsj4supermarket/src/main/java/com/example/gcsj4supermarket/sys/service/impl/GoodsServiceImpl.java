@@ -33,26 +33,20 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     @Autowired
     private AliOssUtil aliOssUtil;
 
-//    @Override
-//    public List<Goods> GetGoodsList() {
-//        return goodsMapper.getGoodsList();
-//    }
-
     @Override
     public Goods getGoodsById(Integer id) {
         return goodsMapper.getGoodsById(id);
     }
 
     @Override
-    public void update(Goods goods) {
+    public void updateGoods(Goods goods) {
         goodsMapper.updateGoods(goods);
     }
 
     @Override
     public void insert(Goods goods) {
         int id = goodsMapper.selectId();
-        goods.setGoodsId(id+1);
-//        goods.setGoodsStatus(1);
+        goods.setGoodsId(id + 1);
         goodsMapper.insert(goods);
     }
 
@@ -65,9 +59,9 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     public void GoodStatus(Integer id) {
         Goods goods = goodsMapper.getGoodsById(id);
         log.info("修改前{}", goods);
-        goods.setGoodsStatus((goods.getGoodsStatus()==1? 0:1));
-        log.info("修改后{}",goods);
-        update(goods);
+        goods.setGoodsStatus(goods.getGoodsStatus() == 1 ? 0 : 1);
+        log.info("修改后{}", goods);
+        updateGoods(goods);
     }
 
     @Override
@@ -76,28 +70,20 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     }
 
     @Override
-    public void updateGoods(Goods goods, MultipartFile file) {
-
-        if(file!=null) {
+    public void updateGoods(Goods goods, MultipartFile file) throws IOException {
+        if (file != null) {
             log.info("上传文件:{}", file);
             try {
-
                 String originalFilename = file.getOriginalFilename();
-
-                String extension = null;
-
-                if (originalFilename != null) {
-                    extension = originalFilename.substring(originalFilename.lastIndexOf('.'));
-                }
-
+                String extension = originalFilename != null ? originalFilename.substring(originalFilename.lastIndexOf('.')) : "";
                 String objectName = UUID.randomUUID().toString() + extension;
-
                 String filePath = aliOssUtil.upload(file.getBytes(), objectName);
                 goods.setGoodsPhoto(filePath);
             } catch (IOException e) {
                 log.error("文件上传失败：{}", e);
+                throw e;
             }
         }
-        update(goods);
+        updateGoods(goods);
     }
 }

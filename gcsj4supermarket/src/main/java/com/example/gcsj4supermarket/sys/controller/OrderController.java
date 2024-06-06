@@ -1,14 +1,13 @@
 package com.example.gcsj4supermarket.sys.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.gcsj4supermarket.common.vo.Result;
 import com.example.gcsj4supermarket.sys.entity.Order;
 import com.example.gcsj4supermarket.sys.service.IOrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -75,16 +74,31 @@ public class OrderController {
         return Result.success(orderService.getOrderByid(id));
     }
 
+//    /**
+//     * 获取所有订单
+//     * @return list<order>
+//     */
+//    @RequestMapping("/GetAllOrder")
+//    public Result<Object> GetAllOrder() {
+//        List<Order> orders = orderService.GetAllOrders();
+//        return Result.success(orders);
+//    }
+
     /**
-     * 获取所有订单
-     * @return list<order>
+     * 获取所有订单（分页）
+     *
+     * @param pageNum  当前页码
+     * @param pageSize 每页显示数量
+     * @return 分页后的订单列表
      */
-    @RequestMapping("/GetAllOrder")
-    public Result<Object> GetAllOrder() {
-        List<Order> orders = orderService.GetAllOrders();
+    @GetMapping("/GetAllOrder")
+    public Result<Object> GetAllOrder(
+            @RequestParam(defaultValue = "1") int pageNum,
+            @RequestParam(defaultValue = "10") int pageSize) {
+        Page<Order> page = new Page<>(pageNum, pageSize);
+        IPage<Order> orders = orderService.getAllOrders(page);
         return Result.success(orders);
     }
-
     /**
      * 修改订单状态
      * @param id

@@ -6,6 +6,8 @@ import com.example.gcsj4supermarket.sys.entity.Goods;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 /**
  * <p>
  *  服务类
@@ -20,7 +22,7 @@ public interface IGoodsService extends IService<Goods> {
 
     Goods getGoodsById(Integer id);
 
-    void update(Goods goods);
+    void updateGoods(Goods goods);
 
     void insert(Goods goods);
 
@@ -30,5 +32,5 @@ public interface IGoodsService extends IService<Goods> {
 
     IPage<Goods> getGoodsPage(Page<Goods> page);
 
-    void updateGoods(Goods goods, MultipartFile file);
+    void updateGoods(Goods goods, MultipartFile file) throws IOException;
 }

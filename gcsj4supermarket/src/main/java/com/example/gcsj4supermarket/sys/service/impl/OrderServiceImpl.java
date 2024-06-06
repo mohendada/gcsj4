@@ -1,5 +1,7 @@
 package com.example.gcsj4supermarket.sys.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.gcsj4supermarket.sys.entity.Order;
 import com.example.gcsj4supermarket.sys.mapper.OrderMapper;
@@ -67,6 +69,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         order.setOrderStatus(order.getOrderStatus()+1);
         if(order.getOrderStatus()==4){
             order.setReceivingTime(LocalDateTime.now());
+            //TODO 存储修改
+//            storeMapper.update()
         }
         orderMapper.update(order);
     }
@@ -74,5 +78,10 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Override
     public List<Order> GetByStatus(Integer status) {
         return orderMapper.GetByStatus(status);
+    }
+
+    @Override
+    public IPage<Order> getAllOrders(Page<Order> page) {
+        return orderMapper.selectPage(page,null);
     }
 }

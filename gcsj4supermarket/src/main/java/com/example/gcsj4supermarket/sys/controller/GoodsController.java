@@ -50,8 +50,8 @@ public class GoodsController {
      * @param pageSize 每页显示记录数
      * @return IPage<Goods>
      */
-    @RequestMapping("/GoodsList")
-    public Result<Object> getGoods(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+    @GetMapping("/GoodsList")
+    public Result<IPage<Goods>> getGoods(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                                    @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         Page<Goods> page = new Page<>(pageNum, pageSize);
         IPage<Goods> goodsPage = goodsService.getGoodsPage(page);
@@ -62,7 +62,7 @@ public class GoodsController {
      * @param id
      * @return good
      */
-    @RequestMapping("/ById")
+    @GetMapping("/ById")
     public Result<?> getGoods(@RequestParam("id") Integer id) {
         Goods good = goodsService.getGoodsById(id);
         log.info("controller getGoods {}", good);
@@ -71,47 +71,44 @@ public class GoodsController {
 
     /**
      * 更新商品信息
-     * @param goods
-     * @return
-     */
-    @RequestMapping("/Update")
-    public Result<?> updateGoods(@RequestBody Goods goods,MultipartFile file) {
-
-
-        goodsService.updateGoods(goods,file);
-        return Result.success();
-    }
-
-    /**
-     * 新增商品
+     *
      * @param goods
      * @param file
      * @return
      */
-    @RequestMapping("/Insert")
-    public Result<?> insertGoods(@RequestBody Goods goods, MultipartFile file) {
+    @PutMapping("/Update")
+    public Result<?> updateGoods(@RequestBody Goods goods, @RequestParam("file") MultipartFile file) {
+        try {
+            goodsService.updateGoods(goods, file);
+            return Result.success();
+        } catch (IOException e) {
+            log.error("更新商品信息失败：{}", e.getMessage());
+            return Result.fail("更新失败");
+        }
+    }
 
+    /**
+     * 新增商品
+     *
+     * @param goods
+     * @param file
+     * @return
+     */
+    @PostMapping("/Insert")
+    public Result<?> insertGoods(@RequestBody Goods goods, @RequestParam("file") MultipartFile file) {
         log.info("上传文件:{}", file);
         try {
-
             String originalFilename = file.getOriginalFilename();
-
-            String extension = null;
-
-            if (originalFilename != null) {
-                extension = originalFilename.substring(originalFilename.lastIndexOf('.'));
-            }
-
+            String extension = originalFilename != null ? originalFilename.substring(originalFilename.lastIndexOf('.')) : "";
             String objectName = UUID.randomUUID().toString() + extension;
-
             String filePath = aliOssUtil.upload(file.getBytes(), objectName);
             goods.setGoodsPhoto(filePath);
             goodsService.insert(goods);
+            return Result.success();
         } catch (IOException e) {
             log.error("文件上传失败：{}", e);
+            return Result.fail("文件上传失败");
         }
-
-        return Result.success();
     }
 
     /**
@@ -119,13 +116,13 @@ public class GoodsController {
      * @param id
      * @return
      */
-    @RequestMapping("/Delete")
+    @DeleteMapping("/Delete")
     public Result<?> deleteGoods(@RequestParam("id") Integer id) {
         goodsService.remove(id);
         return Result.success();
     }
 
-    @RequestMapping("/goodStatus")
+    @PostMapping("/goodStatus")
     public Result<?> GoodStatus(@RequestParam("id") Integer id){
         goodsService.GoodStatus(id);
         return  Result.success();
