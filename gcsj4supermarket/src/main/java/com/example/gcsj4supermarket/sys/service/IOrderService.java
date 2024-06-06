@@ -1,5 +1,7 @@
 package com.example.gcsj4supermarket.sys.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.gcsj4supermarket.sys.entity.Order;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -28,4 +30,6 @@ public interface IOrderService extends IService<Order> {
     void updateStatus(Integer id);
 
     List<Order> GetByStatus(Integer status);
+
+    IPage<Order> getAllOrders(Page<Order> page);
 }

@@ -1,7 +1,9 @@
 package com.example.gcsj4supermarket.sys.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -16,6 +18,8 @@ import java.time.LocalDateTime;
  * @since 2024-05-27
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
+@TableName("'order'")
 public class Order implements Serializable {
 
     @Serial
