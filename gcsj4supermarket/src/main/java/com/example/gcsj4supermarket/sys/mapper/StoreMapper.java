@@ -3,8 +3,6 @@ package com.example.gcsj4supermarket.sys.mapper;
 import com.example.gcsj4supermarket.sys.entity.Order;
 import com.example.gcsj4supermarket.sys.entity.Store;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 /**

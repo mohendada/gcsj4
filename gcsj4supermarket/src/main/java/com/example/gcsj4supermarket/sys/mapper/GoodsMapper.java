@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.gcsj4supermarket.sys.entity.Goods;
 import org.apache.ibatis.annotations.*;
 
-import java.io.Serializable;
-import java.util.List;
 
 /**
  * <p>
@@ -18,8 +16,8 @@ import java.util.List;
 @Mapper
 public interface GoodsMapper extends BaseMapper<Goods> {
 
-    @Select("SELECT * FROM goods")
-    List<Goods> getGoodsList();
+//    @Select("SELECT * FROM goods")
+//    List<Goods> getGoodsList();
 
     @Insert("INSERT INTO goods (goods_id, goods_name, goods_price, goods_photo, supplier_id, goods_status) " +
             "VALUES (#{goodsId}, #{goodsName}, #{goodsPrice}, #{goodsPhoto}, #{supplierId},#{goods_status})")
