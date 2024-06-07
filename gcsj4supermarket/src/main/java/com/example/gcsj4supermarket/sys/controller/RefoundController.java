@@ -40,6 +40,11 @@ public class RefoundController {
         return Result.success(refounds);
     }
 
+    /**
+     * 生成退款
+     * @param order
+     * @return
+     */
     @PostMapping("/generateRefound")
     public Result<?> generate(@RequestBody Order order){
         refoundService.generate(order);

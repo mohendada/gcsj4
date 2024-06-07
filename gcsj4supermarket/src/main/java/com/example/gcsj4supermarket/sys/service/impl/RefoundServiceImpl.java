@@ -46,5 +46,8 @@ public class RefoundServiceImpl extends ServiceImpl<RefoundMapper, Refound> impl
         refound.setReturnGoodsName(order.getOrderName());
         refound.setReturnGoodsNumber(order.getOrderNumber());
         refound.setSupplierId((goodsMapper.selectByName(order.getOrderName())).getSupplierId());
+        refound.setReturnStatue(0);
+        //todo 处理订单表状态
+        refoundMapper.insert(refound);
     }
 }
