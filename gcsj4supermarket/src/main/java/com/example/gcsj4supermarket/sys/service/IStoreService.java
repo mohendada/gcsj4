@@ -1,5 +1,6 @@
 package com.example.gcsj4supermarket.sys.service;
 
+import com.example.gcsj4supermarket.sys.entity.Order;
 import com.example.gcsj4supermarket.sys.entity.Store;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IStoreService extends IService<Store> {
 
+    void finishOrder(Order order);
 }

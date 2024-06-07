@@ -33,7 +33,7 @@ public class Order implements Serializable {
     @TableField("order_status")
     private Integer orderStatus;
     @TableField("order_name")
-    private Integer orderName;
+    private String orderName;
     @TableField("order_number")
     private Integer orderNumber;
     @TableField("order_creater_id")

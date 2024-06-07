@@ -3,6 +3,7 @@ package com.example.gcsj4supermarket.sys.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.gcsj4supermarket.sys.entity.Goods;
 import com.example.gcsj4supermarket.sys.entity.Order;
 import com.example.gcsj4supermarket.sys.mapper.OrderMapper;
 import com.example.gcsj4supermarket.sys.mapper.StoreMapper;
@@ -30,6 +31,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     private OrderMapper orderMapper;
     @Autowired
     private StoreMapper storeMapper;
+    @Autowired
+    private StoreServiceImpl storeService;
 
     @Override
     public int generateOrder(Order order) {
@@ -70,7 +73,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         if(order.getOrderStatus()==4){
             order.setReceivingTime(LocalDateTime.now());
             //TODO 存储修改
-//            storeMapper.update()
+            storeService.finishOrder(order);
         }
         orderMapper.update(order);
     }

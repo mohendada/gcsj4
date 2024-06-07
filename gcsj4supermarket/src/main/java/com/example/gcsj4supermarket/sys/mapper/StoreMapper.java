@@ -1,7 +1,11 @@
 package com.example.gcsj4supermarket.sys.mapper;
 
+import com.example.gcsj4supermarket.sys.entity.Order;
 import com.example.gcsj4supermarket.sys.entity.Store;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * <p>
@@ -12,5 +16,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2024-05-27
  */
 public interface StoreMapper extends BaseMapper<Store> {
+
+    void update(Order order);
+
+    @Update("update store set goods_number = goods_number-#{num} where goods_id= #{id}")
+    void storeDeduce(int id, int num);
 
 }
