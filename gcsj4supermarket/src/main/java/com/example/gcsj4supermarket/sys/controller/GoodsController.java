@@ -96,19 +96,21 @@ public class GoodsController {
      */
     @PostMapping("/Insert")
     public Result<?> insertGoods(@RequestBody Goods goods, @RequestParam("file") MultipartFile file) {
-        log.info("上传文件:{}", file);
-        try {
-            String originalFilename = file.getOriginalFilename();
-            String extension = originalFilename != null ? originalFilename.substring(originalFilename.lastIndexOf('.')) : "";
-            String objectName = UUID.randomUUID().toString() + extension;
-            String filePath = aliOssUtil.upload(file.getBytes(), objectName);
-            goods.setGoodsPhoto(filePath);
-            goodsService.insert(goods);
-            return Result.success();
-        } catch (IOException e) {
-            log.error("文件上传失败：{}", e);
-            return Result.fail("文件上传失败");
+        if ((file!=null)){
+            log.info("上传文件:{}", file);
+            try {
+                String originalFilename = file.getOriginalFilename();
+                String extension = originalFilename != null ? originalFilename.substring(originalFilename.lastIndexOf('.')) : "";
+                String objectName = UUID.randomUUID().toString() + extension;
+                String filePath = aliOssUtil.upload(file.getBytes(), objectName);
+                goods.setGoodsPhoto(filePath);
+            } catch (IOException e) {
+                log.error("文件上传失败：{}", e);
+                return Result.fail("文件上传失败");
+            }
         }
+        goodsService.insert(goods);
+        return Result.success();
     }
 
     /**

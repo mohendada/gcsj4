@@ -3,6 +3,7 @@ package com.example.gcsj4supermarket.sys.mapper;
 import com.example.gcsj4supermarket.sys.entity.Order;
 import com.example.gcsj4supermarket.sys.entity.Store;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 /**
@@ -20,4 +21,7 @@ public interface StoreMapper extends BaseMapper<Store> {
     @Update("update store set goods_number = goods_number-#{num} where goods_id= #{id}")
     void storeDeduce(int id, int num);
 
+
+    @Select("select * from store where goods_id=${goodsId}")
+    Store selectByGoodsId(int goodsId);
 }

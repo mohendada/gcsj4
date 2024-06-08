@@ -3,7 +3,9 @@ package com.example.gcsj4supermarket.sys.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.gcsj4supermarket.sys.entity.Goods;
 import com.example.gcsj4supermarket.sys.entity.Order;
+import com.example.gcsj4supermarket.sys.mapper.GoodsMapper;
 import com.example.gcsj4supermarket.sys.mapper.OrderMapper;
 import com.example.gcsj4supermarket.sys.mapper.StoreMapper;
 import com.example.gcsj4supermarket.sys.service.IOrderService;
@@ -32,13 +34,17 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     private StoreMapper storeMapper;
     @Autowired
     private StoreServiceImpl storeService;
+    @Autowired
+    private GoodsMapper goodsMapper;
 
     @Override
     public int generateOrder(Order order) {
         order.setOrderId(orderMapper.maxId() + 1);
         order.setOrderTime(LocalDateTime.now());
         order.setOrderStatus(1);
-        if (order.getOrderNumber() > storeMapper.selectById(order.getOrderId()).getGoodsNumber()) {
+        int goodsId = goodsMapper.SelectByName(order.getOrderName());
+        log.info("goodsId:{}", goodsId);
+        if (order.getOrderNumber() > storeMapper.selectByGoodsId(goodsId).getGoodsNumber()) {
             return -1;
         }
         log.info(String.valueOf(order));

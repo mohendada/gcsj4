@@ -84,6 +84,22 @@ export const asyncRoutes = [
     ]
   },
   {
+    path: '/sys',
+    component: Layout,
+    redirect: '/sys/goods',
+    name: 'sysManage',
+    meta: {title: '商品管理',icon: 'el-icon-s-help',roles: ['employee']},
+    alwaysShow: true,
+    children: [
+      {
+        path: 'goodsList',
+        name: 'goodsList',
+        component:()=> import('@/views/sys/goods'),
+        meta: {title: "商品浏览",icon: 'userManage'}
+      }
+    ]
+  },
+  {
     path: '/404',
     component: () => import('@/views/404'),
     hidden: true

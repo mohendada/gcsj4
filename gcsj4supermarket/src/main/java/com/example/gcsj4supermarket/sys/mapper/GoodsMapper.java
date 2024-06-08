@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.gcsj4supermarket.sys.entity.Goods;
 import org.apache.ibatis.annotations.*;
 
+import java.io.Serializable;
+
 
 /**
  * <p>
@@ -38,4 +40,7 @@ public interface GoodsMapper extends BaseMapper<Goods> {
 
     @Select(("select * from goods where goods_name = #{orderName}"))
     Goods selectByName(String orderName);
+
+    @Select("select  goods_Id from goods where goods_name=#{name}")
+    int SelectByName(String orderName);
 }
