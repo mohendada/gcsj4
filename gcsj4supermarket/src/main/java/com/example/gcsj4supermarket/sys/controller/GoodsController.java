@@ -6,12 +6,14 @@ import com.example.gcsj4supermarket.common.util.AliOssUtil;
 import com.example.gcsj4supermarket.common.vo.Result;
 import com.example.gcsj4supermarket.sys.entity.Goods;
 import com.example.gcsj4supermarket.sys.service.IGoodsService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.http.HttpRequest;
 import java.util.UUID;
 
 
@@ -95,7 +97,9 @@ public class GoodsController {
      * @return
      */
     @PostMapping("/Insert")
-    public Result<?> insertGoods(@RequestBody Goods goods, @RequestParam("file") MultipartFile file) {
+    public Result<?> insertGoods(Goods goods, MultipartFile file, HttpServletRequest httpRequest) {
+        log.info("收到的请求体:{}",httpRequest.toString());
+        log.info("接收到的Goods对象：{}",goods);
         if ((file!=null)){
             log.info("上传文件:{}", file);
             try {

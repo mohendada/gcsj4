@@ -3,6 +3,7 @@ package com.example.gcsj4supermarket.sys.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.io.Serializable;
  * @author li
  * @since 2024-05-27
  */
+@Mapper
 @Data
 public class Goods implements Serializable {
 

@@ -18,7 +18,11 @@
         <el-table-column prop="goodsId" label="商品ID" width="180"></el-table-column>
         <el-table-column prop="goodsName" label="商品名称" width="180"></el-table-column>
         <el-table-column prop="goodsPrice" label="商品价格" width="180"></el-table-column>
-        <el-table-column prop="goodsPhoto" label="商品图片" width="180"></el-table-column>
+        <el-table-column label="商品图片" width="120">
+          <template slot-scope="scope">
+            <img :src="scope.row.goodsPhoto" alt="商品图片" style="width: 50px; height: 50px"/>
+          </template>
+        </el-table-column>
         <el-table-column prop="supplierId" label="供应商ID" width="180"></el-table-column>
         <el-table-column prop="goodsStatus" label="状态" width="180">
           <template slot-scope="scope">
@@ -47,8 +51,10 @@
         <el-form-item label="商品价格" :label-width="formLabelWidth" prop="goodsPrice">
           <el-input v-model="goodsForm.goodsPrice" type="number" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="商品图片" :label-width="formLabelWidth" prop="goodsPhoto">
-          <el-input v-model="goodsForm.goodsPhoto" autocomplete="off"></el-input>
+        <el-form-item label="商品图片" prop="goodsPhoto">
+          <input type="file" @change="handleFileChange">
+          <img v-if="imageUrl" :src="imageUrl" alt="商品图片预览"
+               style="max-width: 200px; max-height: 200px; margin-top: 10px;">
         </el-form-item>
         <el-form-item label="供应商ID" :label-width="formLabelWidth" prop="supplierId">
           <el-input v-model="goodsForm.supplierId" type="number" autocomplete="off"></el-input>
@@ -79,9 +85,12 @@ export default {
       goodsForm: {
         goodsName: '',
         goodsPrice: '',
-        goodsPhoto: '',
+        goodsPhoto: '', // 保存图片地址
         supplierId: ''
       },
+      goodsPhoto: '',
+      // file : '',
+      imageUrl:'',
       dialogFormVisible: false,
       total: 0,
       searchModel: {
@@ -108,6 +117,15 @@ export default {
     }
   },
   methods: {
+    // 处理文件上传成功事件
+    // handleUploadSuccess(response) {
+    //   this.goodsForm.goodsPhoto = response.data.url; // 将返回的图片地址赋值给商品图片字段
+    // },
+    // // 处理文件上传失败事件
+    // handleUploadError(err) {
+    //   console.log('文件上传失败', err);
+    // },
+    // 其他方法保持不变...
     deleteGoods(goodsId) {
       this.$confirm('此操作将永久删除, 是否继续?', '提示', {
         confirmButtonText: '确定',
@@ -133,10 +151,28 @@ export default {
         })
       })
     },
+    handleFileChange(event) {
+      this.goodsPhoto = event.target.files[0];
+      alert(this.goodsPhoto);
+      const file = event.target.files[0]; // 获取用户选择的文件
+      if (file) {
+        // 使用 FileReader 来读取文件并生成预览图
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.imageUrl = e.target.result; // 将读取到的文件数据保存到 imageUrl 变量中
+        };
+        reader.readAsDataURL(file);
+      }
+    },
     saveGoods() {
+
+      this.goodsForm.goodsPhoto = this.goodsPhoto;
       this.$refs.goodsFormRef.validate(valid => {
+        // this.goodsForm.goodsPhoto = this.goodsPhoto;
+
+        // alert(JSON.stringify(this.goodsForm));
         if (valid) {
-          goodsApi.saveGoods(this.goodsForm).then(() => {
+          goodsApi.saveGoods(this.goodsForm,this.goodsPhoto).then(() => {
             this.$message({
               message: '成功提交',
               type: 'success'
