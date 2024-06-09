@@ -26,3 +26,13 @@ mybatis-plus:
       logic-delete-field: deleted
       logic-not-delete-value: 0
       logic-delete-value: 1
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+gcsj4:
+  alioss:
+      access-key-secret: ${gcsj4.alicloss.acckey}
+      endpoint: ${gcsj4.alicloss.endpoint}
+      bucket-name: ${gcsj4.alicloss.bucket-name}
+      access-key-id: ${gcsj4.alicloss.acckeyid}
+

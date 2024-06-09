@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.net.http.HttpRequest;
 import java.util.UUID;
 
 
@@ -53,14 +52,15 @@ public class GoodsController {
      * @return IPage<Goods>
      */
     @GetMapping("/GoodsList")
-    public Result<IPage<Goods>> getGoods(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
-                                   @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
+    public Result<IPage<Goods>> getGoods(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         Page<Goods> page = new Page<>(pageNum, pageSize);
         IPage<Goods> goodsPage = goodsService.getGoodsPage(page);
         return Result.success(goodsPage);
     }
+
     /**
      * 根据Id查询商品
+     *
      * @param id
      * @return good
      */
@@ -79,7 +79,7 @@ public class GoodsController {
      * @return
      */
     @PutMapping("/Update")
-    public Result<?> updateGoods(Goods goods,MultipartFile file) {
+    public Result<?> updateGoods(Goods goods, MultipartFile file) {
         try {
             goodsService.updateGoods(goods, file);
             return Result.success();
@@ -98,9 +98,9 @@ public class GoodsController {
      */
     @PostMapping("/Insert")
     public Result<?> insertGoods(Goods goods, MultipartFile file, HttpServletRequest httpRequest) {
-        log.info("收到的请求体:{}",httpRequest.toString());
-        log.info("接收到的Goods对象：{}",goods);
-        if ((file!=null)){
+        log.info("收到的请求体:{}", httpRequest.toString());
+        log.info("接收到的Goods对象：{}", goods);
+        if ((file != null)) {
             log.info("上传文件:{}", file);
             try {
                 String originalFilename = file.getOriginalFilename();
@@ -119,6 +119,7 @@ public class GoodsController {
 
     /**
      * 删除商品
+     *
      * @param id
      * @return
      */
@@ -129,8 +130,8 @@ public class GoodsController {
     }
 
     @PostMapping("/goodStatus")
-    public Result<?> GoodStatus(@RequestParam("id") Integer id){
+    public Result<?> GoodStatus(@RequestParam("id") Integer id) {
         goodsService.GoodStatus(id);
-        return  Result.success(9999,"修改成功");
+        return Result.success(9999, "修改成功");
     }
 }
