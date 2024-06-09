@@ -100,6 +100,22 @@ export const asyncRoutes = [
     ]
   },
   {
+    path: '/sys',
+    component: Layout,
+    redirect: '/sys/order',
+    name: 'orderManage',
+    meta: {title: '订单管理', icon: 'el-icon-s-help', roles: ['employee']},
+    alwaysShow: true,
+    children: [
+      {
+        path: 'orderList',
+        name: 'orderList',
+        component: () => import('@/views/sys/order.vue'),
+        meta: {title: "订单浏览", icon: 'orderManage'}
+      }
+    ]
+  },
+  {
     path: '/404',
     component: () => import('@/views/404'),
     hidden: true
