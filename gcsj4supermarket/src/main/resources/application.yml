@@ -4,8 +4,8 @@ server:
 spring:
   datasource:
     username: root
-    password: lry20031004
-    url: jdbc:mysql://localhost:3306/warehouse
+    password: 200314Birthday
+    url: jdbc:mysql://localhost:3306/wms
   data:
     redis:
       port: 6379

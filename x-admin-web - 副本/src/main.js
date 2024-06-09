@@ -7,12 +7,14 @@ import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/zh-CN' // lang i18n
 
 import '@/styles/index.scss' // global css
-
+import axios from "axios";
 import App from './App'
 import store from './store'
 import router from './router'
 import request from './utils/request'
 Vue.prototype.$request = request
+Vue.prototype.$httpUrl='http://localhost:9999'
+Vue.prototype.$axios=axios;
 import '@/icons' // icon
 import '@/permission' // permission control
 

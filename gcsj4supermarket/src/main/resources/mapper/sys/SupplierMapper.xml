@@ -2,4 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.gcsj4supermarket.sys.mapper.SupplierMapper">
 
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.gcsj4supermarket.sys.entity.Supplier">
+        <id column="supplier_id" property="supplierId" />
+        <result column="supplier_phone_number" property="supplierPhoneNumber" />
+        <result column="supplier_address" property="supplierAddress" />
+        <result column="supplier_name" property="supplierName" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        supplier_id, supplier_phone_number, supplier_address, supplier_name
+    </sql>
+
+    <select id="pageC" resultType="com.example.gcsj4supermarket.sys.entity.Supplier">
+        select * from supplier
+    </select>
+
+    <select id="pageCC" resultType="com.example.gcsj4supermarket.sys.entity.Supplier">
+        select * from supplier ${ew.customSqlSegment}
+    </select>
+
 </mapper>
