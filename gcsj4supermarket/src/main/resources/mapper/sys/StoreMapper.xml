@@ -2,6 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.gcsj4supermarket.sys.mapper.StoreMapper">
 
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.gcsj4supermarket.sys.entity.Store">
+        <id column="goods_shelf_id" property="goodsShelfId" />
+        <result column="goods_id" property="goodsId" />
+        <result column="goods_number" property="goodsNumber" />
+        <result column="goods_kind" property="goodsKind" />
+        <result column="goods_store_id" property="goodsStoreId" />
+        <result column="goods_shelf_floor" property="goodsShelfFloor" />
+    </resultMap>
+
+    <select id="pageCC" resultType="com.example.gcsj4supermarket.sys.entity.Record">
+        select * from store ${ew.customSqlSegment}
+    </select>
+
+    <select id="pageCC2" resultType="com.example.gcsj4supermarket.sys.entity.Record">
+        select * from store ${ew.customSqlSegment}
+    </select>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        goods_shelf_id, goods_id, goods_number, goods_kind, goods_store_id, goods_shelf_floor
+    </sql>
+
     <update id="update">
         update store
         <set>
