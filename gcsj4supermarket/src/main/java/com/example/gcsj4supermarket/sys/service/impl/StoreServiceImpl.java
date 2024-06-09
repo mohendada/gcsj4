@@ -32,8 +32,9 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
     }
     @Autowired
     private GoodsMapper goodsMapper;
-    @Autowired
-    private StoreMapper storeMapper;
+
+//    @Autowired
+//    private StoreMapper storeMapper;
 
     @Override
     public IPage pageCC2(IPage<Store> page, Wrapper wrapper) {
