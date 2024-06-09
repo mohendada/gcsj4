@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="31f6c4ec-13c1-4516-aa16-6e4b2fa2deb7" name="默认的" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="spring-beans.schema" />
+        <option value="CSS File" />
+        <option value="Class" />
+        <option value="HTML File" />
+        <option value="Vue Single File Component" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/wms-web" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$PROJECT_DIR$/../../apache-maven-3.6.3" />
+        <option name="userSettingsFile" value="$PROJECT_DIR$/../../apache-maven-3.6.3/conf/settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="ProjectId" id="2CCzpwVN1paZxk1ylbWV0rZP7rx" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/IdeaProjects/gcsj42/gcsj4/x-admin-web - 副本&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.30935252&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.web.browsers&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;de715d4979bbe0a778bb9a23267dce51&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;E:\\IDEA\\IntelliJ IDEA 2022.3.1\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;,
+      &quot;redis&quot;
+    ]
+  }
+}</component>
+  <component name="RebelAgentSelection">
+    <selection>jr</selection>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\IdeaProjects\springboot+vue仓库管理完整代码\springboot_vue_wms\wms-web\src\components\storage" />
+      <recent name="D:\IdeaProjects\springboot+vue仓库管理完整代码\springboot_vue_wms\wms-web\src\components\goods" />
+      <recent name="D:\IdeaProjects\springboot+vue仓库管理完整代码\springboot_vue_wms\wms\src\sql" />
+      <recent name="D:\IdeaProjects\springboot+vue仓库管理完整代码\springboot_vue_wms\wms-web\src\components\admin" />
+      <recent name="$PROJECT_DIR$/wms-web/src/components/user" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.wms.common" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.WmsApplication">
+    <configuration name="CodeGenerator" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.wms.common.CodeGenerator" />
+      <module name="wms" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.wms.common.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WmsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="wms" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wms.WmsApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="serve" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/wms-web/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="serve" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="npm.serve" />
+      <item itemvalue="Spring Boot.WmsApplication" />
+      <item itemvalue="应用程序.CodeGenerator" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\27186\AppData\Roaming\Subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="31f6c4ec-13c1-4516-aa16-6e4b2fa2deb7" name="默认的" comment="" />
+      <created>1658321541156</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1658321541156</updated>
+      <workItem from="1658321549844" duration="1314000" />
+      <workItem from="1658388939268" duration="6188000" />
+      <workItem from="1658406773544" duration="2269000" />
+      <workItem from="1658642212663" duration="4918000" />
+      <workItem from="1658917285242" duration="537000" />
+      <workItem from="1658993896644" duration="3637000" />
+      <workItem from="1659067201564" duration="2669000" />
+      <workItem from="1659252013434" duration="3042000" />
+      <workItem from="1659258548052" duration="1966000" />
+      <workItem from="1659433907197" duration="5609000" />
+      <workItem from="1659523004577" duration="1518000" />
+      <workItem from="1659612866993" duration="1948000" />
+      <workItem from="1664162122343" duration="16000" />
+      <workItem from="1664702110263" duration="4999000" />
+      <workItem from="1664766739002" duration="22257000" />
+      <workItem from="1665805920673" duration="8631000" />
+      <workItem from="1665891433954" duration="16229000" />
+      <workItem from="1716791512645" duration="8433000" />
+      <workItem from="1716858729518" duration="16405000" />
+      <workItem from="1716980449947" duration="4274000" />
+      <workItem from="1717040208658" duration="974000" />
+      <workItem from="1717154936829" duration="8726000" />
+      <workItem from="1717228241140" duration="2701000" />
+      <workItem from="1717231120173" duration="5594000" />
+      <workItem from="1717302265639" duration="7359000" />
+      <workItem from="1717311469272" duration="12153000" />
+      <workItem from="1717396981426" duration="10170000" />
+      <workItem from="1717420481720" duration="1000" />
+      <workItem from="1717422801763" duration="1648000" />
+      <workItem from="1717461880568" duration="16421000" />
+      <workItem from="1717550071578" duration="53089000" />
+      <workItem from="1717653626244" duration="17487000" />
+      <workItem from="1717675660371" duration="11609000" />
+      <workItem from="1717823676270" duration="1777000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/wms-web" />
+    </ignored-roots>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/wms/src/main/java/com/wms/controller/StoreController.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/wms/src/main/java/com/wms/controller/RecordController.java</url>
+          <line>114</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
