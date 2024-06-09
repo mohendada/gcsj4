@@ -3,7 +3,7 @@
     <!-- 搜索栏 -->
     <el-card id="search">
       <el-input v-model="searchModel.goodsName" placeholder="商品名称" clearable/>
-      <el-input v-model="searchModel.supplierId" placeholder="供应商ID" clearable/>
+      <!--      <el-input v-model="searchModel.supplierId" placeholder="供应商ID" clearable/>-->
       <el-button type="primary" round icon="el-icon-search" @click="getGoodsList">查询</el-button>
       <el-button type="primary" icon="el-icon-circle-plus" @click="openAdd(null)">新增</el-button>
     </el-card>
@@ -62,14 +62,14 @@
         <el-form-item label="商品价格" :label-width="formLabelWidth" prop="goodsPrice">
           <el-input v-model="goodsForm.goodsPrice" type="number" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="商品图片" prop="goodsPhoto">
-          <input type="file" @change="handleFileChange">
-          <img v-if="imageUrl" :src="imageUrl" alt="商品图片预览"
-               style="max-width: 200px; max-height: 200px; margin-top: 10px;">
-        </el-form-item>
-        <el-form-item label="供应商ID" :label-width="formLabelWidth" prop="supplierId">
-          <el-input v-model="goodsForm.supplierId" type="number" autocomplete="off"></el-input>
-        </el-form-item>
+          <el-form-item label="商品图片" prop="goodsPhoto">
+            <input type="file" @change="handleFileChange">
+            <img v-if="imageUrl" :src="imageUrl" alt="商品图片预览"
+                 style="max-width: 200px; max-height: 200px; margin-top: 10px;">
+          </el-form-item>
+          <el-form-item label="供应商ID" :label-width="formLabelWidth" prop="supplierId">
+            <el-input v-model="goodsForm.supplierId" type="number" autocomplete="off"></el-input>
+          </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取消</el-button>
@@ -87,7 +87,16 @@ export default {
   computed: {
     ...mapGetters([
       'name'
-    ])
+    ]),
+    filteredGoodsList() {
+      // 根据搜索条件过滤商品列表
+      if (!this.searchModel.goodsName) {
+        return this.allGoods;
+      }
+      return this.allGoods.filter(item =>
+        item.goodsName.toLowerCase().includes(this.searchModel.goodsName.toLowerCase())
+      );
+    }
   },
   data() {
     return {
@@ -112,6 +121,7 @@ export default {
         supplierId: ''
       },
       goodsList: [],
+      allGoods: [], // 存储所有的商品数据
       rules: {
         goodsName: [
           {required: true, message: '请输入商品名称', trigger: 'blur'}
@@ -145,24 +155,14 @@ export default {
               goodsPhoto: '', // 保存图片地址
               supplierId: ''
             };
-            this.imageUrl='';
-            this.goodsPhoto='';
+            this.imageUrl = '';
+            this.goodsPhoto = '';
           })
         })
         .catch(() => {
           // 取消后的操作
         });
     },
-
-    // 处理文件上传成功事件
-    // handleUploadSuccess(response) {
-    //   this.goodsForm.goodsPhoto = response.data.url; // 将返回的图片地址赋值给商品图片字段
-    // },
-    // // 处理文件上传失败事件
-    // handleUploadError(err) {
-    //   console.log('文件上传失败', err);
-    // },
-    // 其他方法保持不变...
     deleteGoods(goodsId) {
       this.$confirm('此操作将永久删除, 是否继续?', '提示', {
         confirmButtonText: '确定',
@@ -239,6 +239,8 @@ export default {
         this.dialogTitle = '修改商品'
         goodsApi.getGoodsById(goodsId).then(response => {
           this.goodsForm = response.data
+          this.imageUrl = this.goodsForm.goodsPhoto
+          this.goodsPhoto = this.imageUrl
         })
       }
       this.dialogFormVisible = true
@@ -253,14 +255,32 @@ export default {
     },
     getGoodsList() {
       goodsApi.getGoodsList(this.searchModel).then(res => {
-        this.goodsList = res.data.records
+        this.allGoods = res.data.records
         this.total = res.data.total
+        this.filterGoodsList()
       })
+    },
+    filterGoodsList() {
+      const start = (this.searchModel.pageNo - 1) * this.searchModel.pageSize
+      const end = start + this.searchModel.pageSize
+      this.goodsList = this.filteredGoodsList.slice(start, end)
+    },
+    handleSearch() {
+      this.searchModel.pageNo = 1
+      this.filterGoodsList()
     }
   },
   created() {
     this.getGoodsList()
-  }
+  },
+  watch: {
+    searchModel: {
+      handler() {
+        this.handleSearch()
+      },
+      deep: true
+    }
+  },
 }
 </script>
 
