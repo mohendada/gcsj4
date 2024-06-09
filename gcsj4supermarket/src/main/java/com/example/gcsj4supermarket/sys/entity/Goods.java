@@ -1,73 +1,44 @@
 package com.example.gcsj4supermarket.sys.entity;
 
+
+import com.baomidou.mybatisplus.annotation.TableField;
+import lombok.Data;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author li
  * @since 2024-05-27
  */
+@Mapper
+@Data
 public class Goods implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
+    @TableField("goods_Id")
     private Integer goodsId;
 
+    @TableField("goods_name")
     private String goodsName;
 
+    @TableField("goods_price")
     private Float goodsPrice;
 
+    @TableField("goods_photo")
     private String goodsPhoto;
 
+    @TableField("supplier_id")
     private Integer supplierId;
 
-    public Integer getGoodsId() {
-        return goodsId;
-    }
+    @TableField("goods_status")
+    private Integer goodsStatus;
 
-    public void setGoodsId(Integer goodsId) {
-        this.goodsId = goodsId;
-    }
-    public String getGoodsName() {
-        return goodsName;
-    }
-
-    public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName;
-    }
-    public Float getGoodsPrice() {
-        return goodsPrice;
-    }
-
-    public void setGoodsPrice(Float goodsPrice) {
-        this.goodsPrice = goodsPrice;
-    }
-    public String getGoodsPhoto() {
-        return goodsPhoto;
-    }
-
-    public void setGoodsPhoto(String goodsPhoto) {
-        this.goodsPhoto = goodsPhoto;
-    }
-    public Integer getSupplierId() {
-        return supplierId;
-    }
-
-    public void setSupplierId(Integer supplierId) {
-        this.supplierId = supplierId;
-    }
-
-    @Override
-    public String toString() {
-        return "Goods{" +
-            "goodsId=" + goodsId +
-            ", goodsName=" + goodsName +
-            ", goodsPrice=" + goodsPrice +
-            ", goodsPhoto=" + goodsPhoto +
-            ", supplierId=" + supplierId +
-        "}";
-    }
 }
