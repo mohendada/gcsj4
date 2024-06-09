@@ -10,24 +10,30 @@
     <!-- 结果列表 -->
     <el-card>
       <el-table :data="goodsList" style="width: 100%">
-        <el-table-column label="#" width="180">
+        <el-table-column label="#" width="60">
           <template slot-scope="scope">
             {{ (searchModel.pageNo - 1) * searchModel.pageSize + scope.$index + 1 }}
           </template>
         </el-table-column>
-        <el-table-column prop="goodsId" label="商品ID" width="180"></el-table-column>
-        <el-table-column prop="goodsName" label="商品名称" width="180"></el-table-column>
-        <el-table-column prop="goodsPrice" label="商品价格" width="180"></el-table-column>
-        <el-table-column label="商品图片" width="120">
+        <el-table-column prop="goodsId" label="商品ID" width="90"></el-table-column>
+        <el-table-column prop="goodsName" label="商品名称" width="150"></el-table-column>
+        <el-table-column prop="goodsPrice" label="商品价格" width="120"></el-table-column>
+        <el-table-column label="商品图片" width="200">
           <template slot-scope="scope">
-            <img :src="scope.row.goodsPhoto" alt="商品图片" style="width: 50px; height: 50px"/>
+            <img :src="scope.row.goodsPhoto" alt="商品图片" style="width: 150px; height: 150px"/>
           </template>
         </el-table-column>
-        <el-table-column prop="supplierId" label="供应商ID" width="180"></el-table-column>
-        <el-table-column prop="goodsStatus" label="状态" width="180">
+        <el-table-column prop="supplierId" label="供应商ID" width="120"></el-table-column>
+        <el-table-column prop="goodsStatus" label="状态" width="120">
           <template slot-scope="scope">
             <el-tag v-if="scope.row.goodsStatus === 0" type="info">未上架</el-tag>
             <el-tag v-if="scope.row.goodsStatus === 1" type="success">已上架</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column label="启用" width="90">
+          <template slot-scope="scope">
+            <el-button @click="changeGoodsStatus(scope.row.goodsId,scope.row.goodsStatus)" type="primary"
+                       icon="el-icon-edit"></el-button>
           </template>
         </el-table-column>
         <el-table-column label="操作" width="180">
@@ -44,6 +50,11 @@
                    layout="total, sizes, prev, pager, next, jumper" :total="total"/>
     <!-- 新增或修改商品 -->
     <el-dialog :title="dialogTitle" :visible.sync="dialogFormVisible" @close="clearForm">
+      <el-form ref="goodsId" :model="goodsForm" v-if="false">
+        <el-form-item label="商品Id" :label-width="formLabelWidth" prop="goodsId">
+          <el-input v-model="goodsForm.goodsId" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
       <el-form ref="goodsFormRef" :model="goodsForm" :rules="rules">
         <el-form-item label="商品名称" :label-width="formLabelWidth" prop="goodsName">
           <el-input v-model="goodsForm.goodsName" autocomplete="off"></el-input>
@@ -69,7 +80,7 @@
 </template>
 
 <script>
-import goodsApi from '@/api/goods'
+import goodsApi, {changeGoodsStatus} from '@/api/goods'
 import {mapGetters} from 'vuex'
 
 export default {
@@ -83,6 +94,7 @@ export default {
       dialogTitle: '',
       formLabelWidth: '130px',
       goodsForm: {
+        goodsId: '',
         goodsName: '',
         goodsPrice: '',
         goodsPhoto: '', // 保存图片地址
@@ -90,7 +102,7 @@ export default {
       },
       goodsPhoto: '',
       // file : '',
-      imageUrl:'',
+      imageUrl: '',
       dialogFormVisible: false,
       total: 0,
       searchModel: {
@@ -117,6 +129,31 @@ export default {
     }
   },
   methods: {
+    changeGoodsStatus(goodsId, status) {
+      this.$confirm(`是否${status === 0 ? '禁用' : '启用'}该商品？`)
+        .then(() => {
+          changeGoodsStatus(goodsId).then(() => {
+            this.$message({
+              type: 'success',
+              message: '已更改'
+            })
+            this.getGoodsList();
+            this.goodsForm = {
+              goodsId: '',
+              goodsName: '',
+              goodsPrice: '',
+              goodsPhoto: '', // 保存图片地址
+              supplierId: ''
+            };
+            this.imageUrl='';
+            this.goodsPhoto='';
+          })
+        })
+        .catch(() => {
+          // 取消后的操作
+        });
+    },
+
     // 处理文件上传成功事件
     // handleUploadSuccess(response) {
     //   this.goodsForm.goodsPhoto = response.data.url; // 将返回的图片地址赋值给商品图片字段
@@ -172,7 +209,7 @@ export default {
 
         // alert(JSON.stringify(this.goodsForm));
         if (valid) {
-          goodsApi.saveGoods(this.goodsForm,this.goodsPhoto).then(() => {
+          goodsApi.saveGoods(this.goodsForm, this.goodsPhoto).then(() => {
             this.$message({
               message: '成功提交',
               type: 'success'

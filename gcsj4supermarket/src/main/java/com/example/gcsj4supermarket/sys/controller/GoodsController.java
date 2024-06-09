@@ -79,7 +79,7 @@ public class GoodsController {
      * @return
      */
     @PutMapping("/Update")
-    public Result<?> updateGoods(@RequestBody Goods goods, @RequestParam("file") MultipartFile file) {
+    public Result<?> updateGoods(Goods goods,MultipartFile file) {
         try {
             goodsService.updateGoods(goods, file);
             return Result.success();
@@ -131,6 +131,6 @@ public class GoodsController {
     @PostMapping("/goodStatus")
     public Result<?> GoodStatus(@RequestParam("id") Integer id){
         goodsService.GoodStatus(id);
-        return  Result.success();
+        return  Result.success(9999,"修改成功");
     }
 }

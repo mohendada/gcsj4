@@ -1,5 +1,7 @@
 package com.example.gcsj4supermarket.sys.mapper;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.gcsj4supermarket.sys.entity.Order;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Delete;
@@ -41,4 +43,6 @@ public interface OrderMapper extends BaseMapper<Order> {
 
     @Select("select * from  `order` where order_status = #{id}")
     List<Order> GetByStatus(Integer id);
+
+    IPage<Order> selectOrderPage(Page<Order> page, Order order);
 }

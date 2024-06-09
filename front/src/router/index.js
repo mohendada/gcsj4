@@ -87,7 +87,7 @@ export const asyncRoutes = [
     path: '/sys',
     component: Layout,
     redirect: '/sys/goods',
-    name: 'sysManage',
+    name: 'goodManage',
     meta: {title: '商品管理',icon: 'el-icon-s-help',roles: ['employee']},
     alwaysShow: true,
     children: [

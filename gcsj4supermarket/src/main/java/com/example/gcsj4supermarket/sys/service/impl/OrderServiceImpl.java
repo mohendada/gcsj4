@@ -90,6 +90,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Override
     public IPage<Order> getAllOrders(Page<Order> page) {
-        return orderMapper.selectPage(page,null);
+        return orderMapper.selectOrderPage(page,null);
     }
 }

@@ -25,11 +25,14 @@ export function saveGoods(data, file) {
   const formData = new FormData();
 
   // 将数据对象的属性逐个添加到 FormData 中
+  if (data.goodsId) formData.append('goodsId', data.goodsId)
   formData.append('goodsName', data.goodsName);
   formData.append('goodsPrice', data.goodsPrice);
   // formData.append('goodsPhoto', data.goodsPhoto);
   formData.append('supplierId', data.supplierId);
   // formData.append('goodsStatus', data.goodsStatus);
+
+
 
   // 添加文件对象到 FormData 中的 file 字段中
   formData.append('file', file);

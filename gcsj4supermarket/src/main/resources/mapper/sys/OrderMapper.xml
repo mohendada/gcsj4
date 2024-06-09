@@ -16,4 +16,28 @@
         WHERE order_id = #{orderId}
     </update>
 
+    <select id="selectPage" resultType="com.example.gcsj4supermarket.sys.entity.Order">
+        SELECT order_id,
+               order_kind,
+               order_time,
+               order_status,
+               order_name,
+               order_number,
+               order_creater_id,
+               receiving_time
+        FROM warehouse.`order`
+    </select>
+    <select id="selectOrderPage" resultType="com.example.gcsj4supermarket.sys.entity.Order">
+        SELECT order_id, order_kind, order_time, order_status, order_name, order_number, order_creater_id,
+        receiving_time
+        FROM `order`
+        <!-- 这里可以加一些条件过滤 -->
+        <where>
+            <if test="order.orderStatus != null">
+                AND order_status = #{order.orderStatus}
+            </if>
+            <!-- 其他条件 -->
+        </where>
+    </select>
+
 </mapper>
