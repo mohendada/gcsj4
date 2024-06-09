@@ -1,25 +1,5 @@
 <template>
   <div>
-    <!-- 新建订单按钮 -->
-    <el-button type="primary" @click="openAddOrder">新建订单</el-button>
-
-    <!-- 新建订单对话框 -->
-    <el-dialog :title="'新建订单'" :visible.sync="dialogFormVisible" width="50%">
-      <el-form :model="orderForm" :rules="rules" ref="orderForm" label-width="100px" style="margin-top: 20px;">
-        <el-form-item label="订单名称" prop="orderName">
-          <el-input v-model="orderForm.orderName" placeholder="请输入订单名称"></el-input>
-        </el-form-item>
-        <el-form-item label="订单数量" prop="orderNumber">
-          <el-input v-model.number="orderForm.orderNumber" placeholder="请输入订单数量" type="number"></el-input>
-        </el-form-item>
-      </el-form>
-
-      <!-- 确认取消按钮 -->
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取消</el-button>
-        <el-button type="primary" @click="saveOrder">确认</el-button>
-      </span>
-    </el-dialog>
 
     <!-- 搜索栏 -->
     <el-card id="search">

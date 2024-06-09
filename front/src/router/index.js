@@ -158,6 +158,22 @@ export const asyncRoutes = [
     ]
   },
   {
+    path: '/sys',
+    component: Layout,
+    redirect: '/sys/refound',
+    name: 'refoundManage',
+    meta: {title: '退货管理', icon: 'el-icon-s-help', roles: ['employee']},
+    alwaysShow: true,
+    children: [
+      {
+        path: 'refoundList',
+        name: 'refoundList',
+        component: () => import('@/views/sys/refound.vue'),
+        meta: {title: "退货申请浏览", icon: 'refoundManage'}
+      }
+    ]
+  },
+  {
     path: '/404',
     component: () => import('@/views/404'),
     hidden: true
