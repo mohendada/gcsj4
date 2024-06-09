@@ -8,11 +8,18 @@ export function getGoodsList(query) {
       pageNum: query.pageNo,
       pageSize: query.pageSize,
       goodsName: query.goodsName,
-      supplierId: query.supplierId
+      // supplierId: query.supplierId
     }
   })
 }
-
+export function getTypes(){
+  return request({
+    url:'goodstype/listPage',
+    method:'post',
+      pageNum: 10,
+      pageSize:0,
+  })
+}
 export function getGoodsById(id) {
   return request({
     url: `/sys/goods/ById`,
@@ -30,6 +37,7 @@ export function saveGoods(data, file) {
   formData.append('goodsPrice', data.goodsPrice);
   // formData.append('goodsPhoto', data.goodsPhoto);
   formData.append('supplierId', data.supplierId);
+  formData.append('goodsType',data.goodsType)
   // formData.append('goodsStatus', data.goodsStatus);
 
 
@@ -68,5 +76,6 @@ export default {
   getGoodsById,
   saveGoods,
   deleteGoods,
-  changeGoodsStatus
+  changeGoodsStatus,
+  getTypes,
 }

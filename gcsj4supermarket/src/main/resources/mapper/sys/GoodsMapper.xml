@@ -10,7 +10,7 @@
             <if test="goodsPhoto != null and goodsPhoto != ''">goods_photo = #{goodsPhoto},</if>
             <if test="supplierId != null">supplier_id = #{supplierId},</if>
             <if test="goodsStatus != null">goods_status = #{goodsStatus},</if>
-            <if test="goodsKind != null and goodsKind != ''">goods_kind= #{goodsKind}</if>
+            <if test="goodsType != null and goodsType != ''">goods_type= #{goodsType}</if>
             <if test="goodsDesc != null and goodsDesc != ''">goods_desc = #{goodsDesc}</if>
         </set>
         WHERE goods_id = #{goodsId}

@@ -64,7 +64,49 @@ export const asyncRoutes = [
         name: 'leavemenage',
         component: () => import('@/views/sys/leavemenage'),
         meta: { title: '请假管理', icon: 'userManage' }
-      }
+      },
+    ]
+  },
+
+
+  {
+    path: '/ck',
+    component: Layout,
+    redirect: '/sys/user',
+    name: 'sysManage',
+    meta: { title: '仓库管理', icon: 'el-icon-s-help', roles: ['manager'] },
+    alwaysShow: true,
+    children: [
+      {
+        path: 'AdminManage',
+        name: 'AdminManage',
+        component: () => import('@/views/supplier/SupplierManage.vue'),
+        meta: { title: '供货商管理', icon: 'Supplier' }
+      },
+      {
+        path: 'StorageManage',
+        name: 'StorageManage',
+        component: () => import('@/views/storage/StorageManage.vue'),
+        meta: { title: '仓库名管理', icon: 'StorageManage' }
+      },
+      {
+        path: 'GoodstypeManage',
+        name: 'GoodstypeManage',
+        component: () => import('@/views/goodstype/GoodstypeManage.vue'),
+        meta: { title: '物品类型管理', icon: 'GoodstypeManage' }
+      },
+      {
+        path: 'GoodsManage',
+        name: 'GoodsManage',
+        component: () => import('@/views/store/GoodsManage.vue'),
+        meta: { title: '物品管理', icon: 'GoodsManage' }
+      },
+      {
+        path: 'RecordManage',
+        name: 'RecordManage',
+        component: () => import('@/views/record/RecordManage.vue'),
+        meta: { title: '记录管理', icon: 'RecordManage' }
+      },
     ]
   },
   {
