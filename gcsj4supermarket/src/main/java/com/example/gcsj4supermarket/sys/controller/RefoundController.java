@@ -3,9 +3,10 @@ package com.example.gcsj4supermarket.sys.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.gcsj4supermarket.common.vo.Result;
-import com.example.gcsj4supermarket.sys.entity.Order;
 import com.example.gcsj4supermarket.sys.entity.Refound;
+import com.example.gcsj4supermarket.sys.mapper.RefoundMapper;
 import com.example.gcsj4supermarket.sys.service.IRefoundService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,12 +18,15 @@ import org.springframework.web.bind.annotation.*;
  * @author li
  * @since 2024-05-27
  */
+@Slf4j
 @RestController
 @RequestMapping("/sys/refound")
 public class RefoundController {
 
     @Autowired
     IRefoundService refoundService;
+    @Autowired
+    private RefoundMapper refoundMapper;
 
     /**
      * 获取所有退款订单（分页）
@@ -41,14 +45,54 @@ public class RefoundController {
     }
 
     /**
-     * 生成退款
-     * @param order
+     * 管理员直接生成退款
+     *
+     * @param orderid
      * @return
      */
     @PostMapping("/generateRefound")
-    public Result<?> generate(@RequestBody Order order){
-        refoundService.generate(order);
-        return Result.success();
+    public Result<?> generate(@RequestParam("orderId") Integer orderid) throws Exception {
+        try {
+            refoundService.generate(orderid);
+            return Result.success();
+        } catch (Exception e) {
+            log.info("捕获异常：{}", e);
+            return Result.fail();
+        }
+    }
+
+    /**
+     * 由用户发起退款申请
+     *
+     * @param orderid //     * @param status
+     * @return
+     */
+    @PostMapping("/RequestRefound")
+    public Result<?> request(@RequestParam("orderId") Integer orderid) throws Exception {
+        try {
+            refoundService.request(orderid);
+            return Result.success();
+        } catch (Exception e) {
+            log.info("捕获异常：{}", e);
+            return Result.fail();
+        }
+    }
+
+    /**
+     * 处理退款申请
+     *
+     * @param orderid
+     * @return
+     */
+    @PostMapping("/confirm")
+    public Result<?> confirm(@RequestParam("orderid") Integer orderid, @RequestParam("status") Integer status) throws Exception {
+        try {
+            refoundService.confirm(orderid, status);
+            return Result.success();
+        } catch (Exception e) {
+            log.info("发生错误：{}", e);
+            return Result.fail();
+        }
     }
 
 }

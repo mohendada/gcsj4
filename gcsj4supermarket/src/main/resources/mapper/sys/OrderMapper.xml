@@ -10,7 +10,7 @@
             <if test="orderStatus != null and orderStatus != ''">order_status = #{orderStatus},</if>
             <if test="orderName != null and orderName != ''">order_name = #{orderName},</if>
             <if test="orderNumber != null and orderNumber != ''">order_number = #{orderNumber},</if>
-            <if test="orderCreaterId != null and orderCreaterId != '">order_creater_id = #{orderCreaterId},</if>
+            <if test="orderCreaterId != null and orderCreaterId != ''">order_creater_id = #{orderCreaterId},</if>
 <!--            <if test="receivingTime != null">receiving_time = #{receivingTime},</if>-->
         </set>
         WHERE order_id = #{orderId}

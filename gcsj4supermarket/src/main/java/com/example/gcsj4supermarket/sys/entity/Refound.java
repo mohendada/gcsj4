@@ -17,10 +17,14 @@ public class Refound implements Serializable {
     private LocalDateTime returnGoodsTime; // 退货时间
     @TableField("return_goods_name")
     private String returnGoodsName; // 货品名称
-    @TableField("return_id")
+    @TableField("return_goods_number")
     private Integer returnGoodsNumber; // 货品数量
     @TableField("supplier_id")
     private Integer supplierId; // 供货商编号
     @TableField("return_statue")
     private Integer returnStatue; // 订单状态（0：未完成1：已完成）
+    @TableField("return_order_id")
+    private Integer returnOrderId;
+    @TableField("return_order_status")
+    private Integer returnOrderStatus;
 }

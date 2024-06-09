@@ -45,4 +45,7 @@ public interface OrderMapper extends BaseMapper<Order> {
     List<Order> GetByStatus(Integer id);
 
     IPage<Order> selectOrderPage(Page<Order> page, Order order);
+
+    @Delete("delete from `order` where order_id=#{orderId}")
+    void deleteOrder(Integer orderId);
 }

@@ -18,5 +18,9 @@ public interface IRefoundService extends IService<Refound> {
 
     IPage<Refound> getAllRefounds(Page<Refound> page);
 
-    void generate(Order order);
+    void generate(int orderid);
+
+    void request(Integer orderid);
+
+    void confirm(Integer orderid, Integer status);
 }
