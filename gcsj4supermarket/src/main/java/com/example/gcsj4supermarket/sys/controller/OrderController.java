@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -34,9 +35,9 @@ public class OrderController {
      */
 
     @RequestMapping("/GenerateOrder")
-    public Result<Integer> GenerateOrder(@RequestBody Order order) {
-        log.info("controller order: {}", order);
-        int num = orderService.generateOrder(order);
+    public Result<Integer> GenerateOrder(@RequestBody Order order, @RequestParam("time")LocalDateTime time) {
+        log.info("controller order: {},time: {}", order,time);
+        int num = orderService.generateOrder(order,time);
         if (num != -1) {
             return Result.success(num);
         } else return Result.fail();

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.gcsj4supermarket.sys.entity.Order;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public interface IOrderService extends IService<Order> {
 
-    int generateOrder(Order order);
+    int generateOrder(Order order ,LocalDateTime time);
 
     void updateOrder(Order order);
 

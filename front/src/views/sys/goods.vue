@@ -15,9 +15,9 @@
             {{ (searchModel.pageNo - 1) * searchModel.pageSize + scope.$index + 1 }}
           </template>
         </el-table-column>
-        <el-table-column prop="goodsId" label="商品ID" width="90"></el-table-column>
-        <el-table-column prop="goodsName" label="商品名称" width="150"></el-table-column>
-        <el-table-column prop="goodsPrice" label="商品价格" width="120"></el-table-column>
+<!--        <el-table-column prop="goodsId" label="商品ID" width="90"></el-table-column>-->
+        <el-table-column prop="goodsName" label="商品名称" width="80"></el-table-column>
+        <el-table-column prop="goodsPrice" label="商品价格" width="80"></el-table-column>
         <el-table-column label="商品图片" width="200">
           <template slot-scope="scope">
             <img :src="scope.row.goodsPhoto" alt="商品图片" style="width: 150px; height: 150px"/>
@@ -30,6 +30,9 @@
             <el-tag v-if="scope.row.goodsStatus === 1" type="success">已上架</el-tag>
           </template>
         </el-table-column>
+
+        <el-table-column prop="goodsType" label="商品种类" width="120"></el-table-column>
+        <el-table-column prop="goodsDesc" label="商品描述" width="120"></el-table-column>
         <el-table-column label="启用" width="90">
           <template slot-scope="scope">
             <el-button @click="changeGoodsStatus(scope.row.goodsId,scope.row.goodsStatus)" type="primary"
@@ -70,6 +73,12 @@
           <el-form-item label="供应商ID" :label-width="formLabelWidth" prop="supplierId">
             <el-input v-model="goodsForm.supplierId" type="number" autocomplete="off"></el-input>
           </el-form-item>
+        <el-form-item label="商品种类" :label-width="formLabelWidth" prop="goodsType">
+          <el-input v-model="goodsForm.goodsType" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="描述" :label-width="formLabelWidth" prop="goodsDesc">
+          <el-input type="textarea" v-model="goodsForm.goodsDesc" autocomplete="off"></el-input>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取消</el-button>
@@ -107,7 +116,9 @@ export default {
         goodsName: '',
         goodsPrice: '',
         goodsPhoto: '', // 保存图片地址
-        supplierId: ''
+        supplierId: '',
+        goodsType:'',
+        goodsDesc:''
       },
       goodsPhoto: '',
       // file : '',
@@ -134,7 +145,13 @@ export default {
         ],
         supplierId: [
           {required: true, message: '请输入供应商ID', trigger: 'blur'}
-        ]
+        ],
+        goodsType: [
+          {required: true, message: '请选择商品种类', trigger: 'blur'}
+        ],
+        // goodsDesc:[
+        //   {required: true, message: '请输入商品描述', trigger: 'blur'}
+        // ]
       }
     }
   },
@@ -153,7 +170,9 @@ export default {
               goodsName: '',
               goodsPrice: '',
               goodsPhoto: '', // 保存图片地址
-              supplierId: ''
+              supplierId: '',
+              goodsType: '',
+              goodsDesc: ''
             };
             this.imageUrl = '';
             this.goodsPhoto = '';

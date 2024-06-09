@@ -21,8 +21,8 @@ public interface GoodsMapper extends BaseMapper<Goods> {
 //    @Select("SELECT * FROM goods")
 //    List<Goods> getGoodsList();
 
-    @Insert("INSERT INTO goods (goods_id, goods_name, goods_price, goods_photo, supplier_id, goods_status) " +
-            "VALUES (#{goodsId}, #{goodsName}, #{goodsPrice}, #{goodsPhoto}, #{supplierId},#{goodsStatus})")
+    @Insert("INSERT INTO goods (goods_id, goods_name, goods_price, goods_photo, supplier_id, goods_status, goods_type,goods_desc) " +
+            "VALUES (#{goodsId}, #{goodsName}, #{goodsPrice}, #{goodsPhoto}, #{supplierId},#{goodsStatus},#{goodsType},#{goodsDesc})")
     int insert(Goods goods);
 
     @Select("select * FROM goods WHERE goods_id = #{id}")

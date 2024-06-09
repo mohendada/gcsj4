@@ -41,4 +41,10 @@ public class Goods implements Serializable {
     @TableField("goods_status")
     private Integer goodsStatus;
 
+    @TableField("goods_type")
+    private String goodsType;
+
+    @TableField("goods_desc")
+    private String goodsDesc;
+
 }
