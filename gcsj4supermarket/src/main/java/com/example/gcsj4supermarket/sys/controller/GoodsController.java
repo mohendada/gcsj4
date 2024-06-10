@@ -5,22 +5,15 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.gcsj4supermarket.common.Res2.QueryPageParam;
-import com.example.gcsj4supermarket.common.Res2.Result;
-import com.example.gcsj4supermarket.sys.entity.Goods;
-import com.example.gcsj4supermarket.sys.service.IGoodsService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.gcsj4supermarket.common.util.AliOssUtil;
+import com.example.gcsj4supermarket.common.Res2.Result2;
 import com.example.gcsj4supermarket.common.vo.Result;
 import com.example.gcsj4supermarket.sys.entity.Goods;
 import com.example.gcsj4supermarket.sys.service.IGoodsService;
-import jakarta.servlet.http.HttpServletRequest;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.example.gcsj4supermarket.common.util.AliOssUtil;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -101,27 +94,24 @@ public class GoodsController {
             return Result.fail("更新失败");
         }
     }
-
-    @Autowired
-    private IGoodsService goodsService;
     //新增
     @PostMapping("/save")
-    public Result save(@RequestBody Goods goods){
-        return goodsService.save(goods)?Result.suc():Result.fail();
+    public Result2 save(@RequestBody Goods goods){
+        return goodsService.save(goods)? Result2.suc(): Result2.fail();
     }
     //更新
     @PostMapping("/update")
-    public Result update(@RequestBody Goods goods){
-        return goodsService.updateById(goods)?Result.suc():Result.fail();
+    public Result2 update(@RequestBody Goods goods){
+        return goodsService.updateById(goods)? Result2.suc(): Result2.fail();
     }
     //删除
     @GetMapping("/del")
-    public Result del(@RequestParam String id){
-        return goodsService.removeById(id)?Result.suc():Result.fail();
+    public Result2 del(@RequestParam String id){
+        return goodsService.removeById(id)? Result2.suc(): Result2.fail();
     }
 
     @PostMapping("/listPage")
-    public Result listPage(@RequestBody QueryPageParam query){
+    public Result2 listPage(@RequestBody QueryPageParam query){
         HashMap param = query.getParam();
         String name = (String)param.get("name");
         String goodstype = (String)param.get("goodstype");
@@ -140,7 +130,7 @@ public class GoodsController {
         }
 
         IPage result = goodsService.pageCC(page,lambdaQueryWrapper);
-        return Result.suc(result.getRecords(),result.getTotal());
+        return Result2.suc(result.getRecords(),result.getTotal());
     }
 
 

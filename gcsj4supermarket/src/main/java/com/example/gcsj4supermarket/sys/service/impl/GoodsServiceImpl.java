@@ -39,9 +39,6 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     }
 
     @Autowired
-    private GoodsMapper goodsMapper;
-
-    @Autowired
     private AliOssUtil aliOssUtil;
 
     @Override

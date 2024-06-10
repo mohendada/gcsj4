@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.gcsj4supermarket.common.Res2.QueryPageParam;
-import com.example.gcsj4supermarket.common.Res2.Result;
+import com.example.gcsj4supermarket.common.Res2.Result2;
 import com.example.gcsj4supermarket.sys.entity.Store;
 import com.example.gcsj4supermarket.sys.service.IOrderService;
 import com.example.gcsj4supermarket.sys.service.IRecordService;
@@ -41,7 +41,7 @@ public class RecordController {
     IOrderService orderService;
 
     @PostMapping("/listPage")
-    public Result listPage(@RequestBody QueryPageParam query) {
+    public Result2 listPage(@RequestBody QueryPageParam query) {
         HashMap param = query.getParam();
         String goodsName = (String) param.get("goodsName");
         String goodsKind = (String) param.get("goodsKind");
@@ -63,7 +63,7 @@ public class RecordController {
         }
 
         IPage result = recordService.pageCC(page, lambdaQueryWrapper);
-        return Result.suc(result.getRecords(), result.getTotal());
+        return Result2.suc(result.getRecords(), result.getTotal());
     }
 
 
@@ -106,7 +106,7 @@ public class RecordController {
 
 
     @PostMapping("/save")
-    public Result save(@RequestBody Record record) {
+    public Result2 save(@RequestBody Record record) {
         QueryWrapper<Store> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("goods_id", record.getGoodsId());
         Store store = storeService.getOne(queryWrapper);
@@ -125,12 +125,12 @@ public class RecordController {
             store.setGoodsNumber(num);
         }
         storeService.updateById(store);
-        return recordService.save(record) ? Result.suc() : Result.fail();
+        return recordService.save(record) ? Result2.suc() : Result2.fail();
     }
 
 
     @GetMapping("/del")
-    public Result del(@RequestParam String id) {
-        return recordService.removeById(id) ? Result.suc() : Result.fail();
+    public Result2 del(@RequestParam String id) {
+        return recordService.removeById(id) ? Result2.suc() : Result2.fail();
     }
 }

@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.gcsj4supermarket.common.Res2.QueryPageParam;
-import com.example.gcsj4supermarket.common.Res2.Result;
+import com.example.gcsj4supermarket.common.Res2.Result2;
 import com.example.gcsj4supermarket.sys.entity.Storage;
 import com.example.gcsj4supermarket.sys.service.IStorageService;
 
@@ -33,24 +33,24 @@ public class StorageController {
 
     //新增
     @PostMapping("/save")
-    public Result save(@RequestBody Storage storage) {
-        return storageService.save(storage) ? Result.suc() : Result.fail();
+    public Result2 save(@RequestBody Storage storage) {
+        return storageService.save(storage) ? Result2.suc() : Result2.fail();
     }
 
     //更新
     @PostMapping("/update")
-    public Result update(@RequestBody Storage storage) {
-        return storageService.updateById(storage) ? Result.suc() : Result.fail();
+    public Result2 update(@RequestBody Storage storage) {
+        return storageService.updateById(storage) ? Result2.suc() : Result2.fail();
     }
 
     //删除
     @GetMapping("/del")
-    public Result del(@RequestParam String id) {
-        return storageService.removeById(id) ? Result.suc() : Result.fail();
+    public Result2 del(@RequestParam String id) {
+        return storageService.removeById(id) ? Result2.suc() : Result2.fail();
     }
 
     @PostMapping("/listPage")
-    public Result listPage(@RequestBody QueryPageParam query) {
+    public Result2 listPage(@RequestBody QueryPageParam query) {
         HashMap param = query.getParam();
         String name = (String) param.get("name");
 
@@ -64,12 +64,12 @@ public class StorageController {
         }
 
         IPage result = storageService.pageCC(page, lambdaQueryWrapper);
-        return Result.suc(result.getRecords(), result.getTotal());
+        return Result2.suc(result.getRecords(), result.getTotal());
     }
 
     @GetMapping("/list")
-    public Result list() {
+    public Result2 list() {
         List list = storageService.list();
-        return Result.suc(list);
+        return Result2.suc(list);
     }
 }

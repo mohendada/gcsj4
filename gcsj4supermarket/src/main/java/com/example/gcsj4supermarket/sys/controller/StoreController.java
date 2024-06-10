@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.gcsj4supermarket.common.Res2.QueryPageParam;
-import com.example.gcsj4supermarket.common.Res2.Result;
+import com.example.gcsj4supermarket.common.Res2.Result2;
 import com.example.gcsj4supermarket.sys.entity.Store;
 import com.example.gcsj4supermarket.sys.service.IStoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,25 +32,25 @@ public class StoreController  {
 
     //新增
     @PostMapping("/save")
-    public Result save(@RequestBody Store store)  {
+    public Result2 save(@RequestBody Store store)  {
         System.out.println(store);
-        return storeService.save(store) ? Result.suc() : Result.fail();
+        return storeService.save(store) ? Result2.suc() : Result2.fail();
     }
 
     //更新
     @PostMapping("/update")
-    public Result update(@RequestBody Store store) {
-        return storeService.updateById(store) ? Result.suc() : Result.fail();
+    public Result2 update(@RequestBody Store store) {
+        return storeService.updateById(store) ? Result2.suc() : Result2.fail();
     }
 
     //删除
     @GetMapping("/del")
-    public Result del(@RequestParam int id) {
-        return storeService.removeById(id) ? Result.suc() : Result.fail();
+    public Result2 del(@RequestParam int id) {
+        return storeService.removeById(id) ? Result2.suc() : Result2.fail();
     }
 
     @PostMapping("/listPage")
-    public Result listPage(@RequestBody QueryPageParam query) {
+    public Result2 listPage(@RequestBody QueryPageParam query) {
         HashMap param = query.getParam();
         String goodsName = (String) param.get("goodsName");
         String goodsKind = (String) param.get("goodsKind");
@@ -74,17 +74,17 @@ public class StoreController  {
 
         IPage result = storeService.pageCC(page, lambdaQueryWrapper);
 
-        return Result.suc(result.getRecords(), result.getTotal());
+        return Result2.suc(result.getRecords(), result.getTotal());
     }
 
 
     @PostMapping("/getStoreId")
-    public Result listP(@RequestBody QueryPageParam query) {List<Store> stores = storeService.list();
+    public Result2 listP(@RequestBody QueryPageParam query) {List<Store> stores = storeService.list();
         Page<Store> page = new Page();
         page.setCurrent(query.getPageNum());
         page.setSize(query.getPageSize());
         QueryWrapper<Store> queryWrapper = new QueryWrapper();
         IPage result = storeService.pageCC(page,queryWrapper.select("distinct goods_store_id"));
-        return Result.suc(result.getRecords(),result.getTotal());
+        return Result2.suc(result.getRecords(),result.getTotal());
     }
 }

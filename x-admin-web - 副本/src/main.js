@@ -7,14 +7,15 @@ import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/zh-CN' // lang i18n
 
 import '@/styles/index.scss' // global css
-    1
+import axios from "axios";
 import App from './App'
 import store from './store'
 import router from './router'
 import request from './utils/request'
+
 Vue.prototype.$request = request
-Vue.prototype.$httpUrl='http://localhost:9999'
-Vue.prototype.$axios=axios;
+Vue.prototype.$httpUrl = 'http://localhost:9999'
+Vue.prototype.$axios = axios;
 import '@/icons' // icon
 import '@/permission' // permission control
 
@@ -27,12 +28,12 @@ import '@/permission' // permission control
  * please remove it before going online ! ! !
  */
 if (process.env.NODE_ENV === 'production') {
-  const { mockXHR } = require('../mock')
+  const {mockXHR} = require('../mock')
   mockXHR()
 }
 
 // set ElementUI lang to EN
-Vue.use(ElementUI, { locale })
+Vue.use(ElementUI, {locale})
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
 

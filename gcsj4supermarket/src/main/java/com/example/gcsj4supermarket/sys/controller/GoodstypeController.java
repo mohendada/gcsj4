@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.gcsj4supermarket.common.Res2.QueryPageParam;
-import com.example.gcsj4supermarket.common.Res2.Result;
+import com.example.gcsj4supermarket.common.Res2.Result2;
 import com.example.gcsj4supermarket.sys.entity.Goodstype;
 import com.example.gcsj4supermarket.sys.service.IGoodstypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,22 +30,22 @@ public class GoodstypeController {
     private IGoodstypeService goodstypeService;
     //新增
     @PostMapping("/save")
-    public Result save(@RequestBody Goodstype goodstype){
-        return goodstypeService.save(goodstype)?Result.suc():Result.fail();
+    public Result2 save(@RequestBody Goodstype goodstype){
+        return goodstypeService.save(goodstype)? Result2.suc(): Result2.fail();
     }
     //更新
     @PostMapping("/update")
-    public Result update(@RequestBody Goodstype goodstype){
-        return goodstypeService.updateById(goodstype)?Result.suc():Result.fail();
+    public Result2 update(@RequestBody Goodstype goodstype){
+        return goodstypeService.updateById(goodstype)? Result2.suc(): Result2.fail();
     }
     //删除
     @GetMapping("/del")
-    public Result del(@RequestParam String id){
-        return goodstypeService.removeById(id)?Result.suc():Result.fail();
+    public Result2 del(@RequestParam String id){
+        return goodstypeService.removeById(id)? Result2.suc(): Result2.fail();
     }
 
     @PostMapping("/listPage")
-    public Result listPage(@RequestBody QueryPageParam query){
+    public Result2 listPage(@RequestBody QueryPageParam query){
         HashMap param = query.getParam();
         String name = (String)param.get("name");
 
@@ -59,11 +59,11 @@ public class GoodstypeController {
         }
 
         IPage result = goodstypeService.pageCC(page,lambdaQueryWrapper);
-        return Result.suc(result.getRecords(),result.getTotal());
+        return Result2.suc(result.getRecords(),result.getTotal());
     }
     @GetMapping("/list")
-    public Result list(){
+    public Result2 list(){
         List list = goodstypeService.list();
-        return Result.suc(list);
+        return Result2.suc(list);
     }
 }

@@ -5,12 +5,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.gcsj4supermarket.common.Res2.QueryPageParam;
-import com.example.gcsj4supermarket.common.Res2.Result;
+import com.example.gcsj4supermarket.common.Res2.Result2;
 import com.example.gcsj4supermarket.sys.entity.Supplier;
 import com.example.gcsj4supermarket.sys.service.ISupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
 
 
 import java.util.HashMap;
@@ -40,27 +39,27 @@ public class SupplierController {
 
 
     @GetMapping("/findByNo")
-    public Result findByNo(@RequestParam String id) {
+    public Result2 findByNo(@RequestParam String id) {
         List list = supplierService.lambdaQuery().eq(Supplier::getSupplierId, id).list();
-        return list.size() > 0 ? Result.suc(list) : Result.fail();
+        return list.size() > 0 ? Result2.suc(list) : Result2.fail();
     }
 
     //新增
     @PostMapping("/save")
-    public Result save(@RequestBody Supplier supplier) {
-        return supplierService.save(supplier) ? Result.suc() : Result.fail();
+    public Result2 save(@RequestBody Supplier supplier) {
+        return supplierService.save(supplier) ? Result2.suc() : Result2.fail();
     }
 
     //更新
     @PostMapping("/update")
-    public Result update(@RequestBody Supplier supplier) {
-        return supplierService.updateById(supplier) ? Result.suc() : Result.fail();
+    public Result2 update(@RequestBody Supplier supplier) {
+        return supplierService.updateById(supplier) ? Result2.suc() : Result2.fail();
     }
 
     //删除
     @GetMapping("/del")
-    public Result del(@RequestParam int supplierId) {
-        return supplierService.removeById(supplierId) ? Result.suc() : Result.fail();
+    public Result2 del(@RequestParam int supplierId) {
+        return supplierService.removeById(supplierId) ? Result2.suc() : Result2.fail();
     }
 
 
@@ -84,13 +83,13 @@ public class SupplierController {
 
     //查询（模糊、匹配）
     @PostMapping("/listP")
-    public Result listP(@RequestBody Supplier supplier) {
+    public Result2 listP(@RequestBody Supplier supplier) {
         LambdaQueryWrapper<Supplier> lambdaQueryWrapper = new LambdaQueryWrapper();
         if (StringUtils.isNotBlank(supplier.getSupplierName())) {
             lambdaQueryWrapper.like(Supplier::getSupplierName, supplier.getSupplierName());
         }
 
-        return Result.suc(supplierService.list(lambdaQueryWrapper));
+        return Result2.suc(supplierService.list(lambdaQueryWrapper));
     }
 
     @PostMapping("/listPage")
@@ -144,7 +143,7 @@ public class SupplierController {
     }
 
     @PostMapping("/listPageC1")
-    public Result listPageC1(@RequestBody QueryPageParam query) {
+    public Result2 listPageC1(@RequestBody QueryPageParam query) {
         HashMap param = query.getParam();
         String name = (String) param.get("supplierName");
         String phone = (String) param.get("supplierPhoneNumber");
@@ -169,6 +168,6 @@ public class SupplierController {
 
         System.out.println("total==" + result.getTotal());
 
-        return Result.suc(result.getRecords(), result.getTotal());
+        return Result2.suc(result.getRecords(), result.getTotal());
     }
 }
