@@ -8,12 +8,12 @@ import java.util.Collections;
 
 public class code {
     public static void main(String[] args) {
-        String url="jdbc:mysql:///warehouse";
+        String url="jdbc:mysql:///wms";
         String username="root";
-        String password="lry20031004";
+        String password="200314Birthday";
         String moudleName="sys";
         String mapperLocation="D:\\IDEA\\springtest\\gcsj4supermarket\\src\\main\\resources\\mapper\\"+moudleName;
-        String tables="user";
+        String tables="shoppingcart";
         FastAutoGenerator.create(url, username, password)
                 .globalConfig(builder -> {
                     builder.author("li") // 设置作者

@@ -260,6 +260,7 @@ export default {
         // count:''
       },
       form1: {
+        createtime:'',
         // goods: '',
         goodsId: '',
         goodsName: '',
@@ -383,11 +384,11 @@ export default {
         alert('请选择记录');
         return;
       }
-
       this.inDialogVisible = true
       this.$nextTick(() => {
         this.resetInForm()
       })
+      console.log(new Date().getTime())
       this.form1.goodsKind = this.currentRow.goodsKind
       this.form1.goodsStoreId = this.currentRow.goodsStoreId
       this.form1.goodsName = this.currentRow.goodsName
@@ -560,7 +561,8 @@ export default {
     this.loadGoodstype()
     this.loadPost()
 
-  }
+  },
+
 }
 </script>
 

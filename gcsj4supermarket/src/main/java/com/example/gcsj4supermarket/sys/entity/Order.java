@@ -23,7 +23,7 @@ public class Order implements Serializable {
 
     private Integer orderStatus;
 
-    private Integer orderName;
+    private String orderName;
 
     private Integer orderNumber;
 
@@ -59,11 +59,11 @@ public class Order implements Serializable {
     public void setOrderStatus(Integer orderStatus) {
         this.orderStatus = orderStatus;
     }
-    public Integer getOrderName() {
+    public String getOrderName() {
         return orderName;
     }
 
-    public void setOrderName(Integer orderName) {
+    public void setOrderName(String orderName) {
         this.orderName = orderName;
     }
     public Integer getOrderNumber() {

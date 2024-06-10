@@ -61,6 +61,7 @@ public class StoreController  {
         page.setSize(query.getPageSize());
 
         LambdaQueryWrapper<Store> lambdaQueryWrapper = new LambdaQueryWrapper();
+
         if (StringUtils.isNotBlank(goodsName) && !"null".equals(goodsName)) {
             lambdaQueryWrapper.like(Store::getGoodsName, goodsName);
         }
@@ -72,6 +73,7 @@ public class StoreController  {
         }
 
         IPage result = storeService.pageCC(page, lambdaQueryWrapper);
+
         return Result.suc(result.getRecords(), result.getTotal());
     }
 

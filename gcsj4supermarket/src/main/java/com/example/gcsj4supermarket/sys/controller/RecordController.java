@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.gcsj4supermarket.sys.entity.Record;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 /**
@@ -110,11 +111,14 @@ public class RecordController {
         queryWrapper.eq("goods_id", record.getGoodsId());
         Store store = storeService.getOne(queryWrapper);
         int n = record.getGoodsNumber();
-        //action==2表示出库
+        record.setCreatetime(LocalDateTime.now());
+      //action==2表示出库
         if ("2".equals(record.getAction())) {
             n = -n;
             record.setGoodsNumber(n);
             record.setAction("出库");
+            int num = store.getGoodsNumber() + n;
+            store.setGoodsNumber(num);
         } else {
             record.setAction("入库");
             int num = store.getGoodsNumber() + n;

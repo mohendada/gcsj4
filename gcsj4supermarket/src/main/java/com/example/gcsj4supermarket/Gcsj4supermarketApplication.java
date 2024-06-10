@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @MapperScan("com.example.gcsj4supermarket.*.mapper")
 public class Gcsj4supermarketApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(Gcsj4supermarketApplication.class, args);
     }

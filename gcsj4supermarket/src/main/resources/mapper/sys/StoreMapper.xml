@@ -12,17 +12,17 @@
         <result column="goods_shelf_floor" property="goodsShelfFloor" />
     </resultMap>
 
-    <select id="pageCC" resultType="com.example.gcsj4supermarket.sys.entity.Record">
+    <select id="pageCC" resultType="com.example.gcsj4supermarket.sys.entity.Store">
         select * from store ${ew.customSqlSegment}
     </select>
 
-    <select id="pageCC2" resultType="com.example.gcsj4supermarket.sys.entity.Record">
+    <select id="pageCC2" resultType="com.example.gcsj4supermarket.sys.entity.Store">
         select * from store ${ew.customSqlSegment}
     </select>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        goods_shelf_id, goods_id, goods_number, goods_kind, goods_store_id, goods_shelf_floor
+        goods_shelf_id, goods_id, goods_number, goods_kind, goods_store_id, goods_shelf_floor,
     </sql>
 
 </mapper>
