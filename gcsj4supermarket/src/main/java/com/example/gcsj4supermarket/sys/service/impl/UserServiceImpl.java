@@ -80,6 +80,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             list.add(loginUser.getRoles());
            data.put("roles",list);
            data.put("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+           data.put("id",loginUser.getUserId());
            return data;
        }
         return null;
@@ -119,6 +120,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public void updatePasswordById(User user) {
         userMapper.updateById(user);
+    }
+
+
+    @Override
+    public User getUserByName(String userName) {
+        return userMapper.getUserByName(userName);
+    }
+
+    @Override
+    public User getUserByUId(Integer userId) {
+        return userMapper.getUserByUId(userId);
     }
 
 

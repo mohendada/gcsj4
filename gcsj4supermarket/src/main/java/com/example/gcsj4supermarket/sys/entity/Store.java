@@ -2,82 +2,40 @@ package com.example.gcsj4supermarket.sys.entity;
 
 import java.io.Serializable;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 /**
  * <p>
- * 
+ *
  * </p>
  *
- * @author li
- * @since 2024-05-27
+ * @author wms
+ * @since 2024-06-04
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@ApiModel(value="Store对象", description="")
 public class Store implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    @ApiModelProperty(value = "商品名称")
+    private String goodsName;
+    @ApiModelProperty(value = "货架编号")
     private Integer goodsShelfId;
-
-    private Integer goodsId;
-
+    @TableId(value = "goods_id", type = IdType.AUTO)
+    @ApiModelProperty(value = "商品ID")
+    private Integer goodsId;//主键
+    @ApiModelProperty(value = "商品数量")
     private Integer goodsNumber;
-
+    @ApiModelProperty(value = "商品种类")
     private String goodsKind;
-
+    @ApiModelProperty(value = "存储仓库编号")
     private Integer goodsStoreId;
-
+    @ApiModelProperty(value = "层号")
     private Integer goodsShelfFloor;
-
-    public Integer getGoodsShelfId() {
-        return goodsShelfId;
-    }
-
-    public void setGoodsShelfId(Integer goodsShelfId) {
-        this.goodsShelfId = goodsShelfId;
-    }
-    public Integer getGoodsId() {
-        return goodsId;
-    }
-
-    public void setGoodsId(Integer goodsId) {
-        this.goodsId = goodsId;
-    }
-    public Integer getGoodsNumber() {
-        return goodsNumber;
-    }
-
-    public void setGoodsNumber(Integer goodsNumber) {
-        this.goodsNumber = goodsNumber;
-    }
-    public String getGoodsKind() {
-        return goodsKind;
-    }
-
-    public void setGoodsKind(String goodsKind) {
-        this.goodsKind = goodsKind;
-    }
-    public Integer getGoodsStoreId() {
-        return goodsStoreId;
-    }
-
-    public void setGoodsStoreId(Integer goodsStoreId) {
-        this.goodsStoreId = goodsStoreId;
-    }
-    public Integer getGoodsShelfFloor() {
-        return goodsShelfFloor;
-    }
-
-    public void setGoodsShelfFloor(Integer goodsShelfFloor) {
-        this.goodsShelfFloor = goodsShelfFloor;
-    }
-
-    @Override
-    public String toString() {
-        return "Store{" +
-            "goodsShelfId=" + goodsShelfId +
-            ", goodsId=" + goodsId +
-            ", goodsNumber=" + goodsNumber +
-            ", goodsKind=" + goodsKind +
-            ", goodsStoreId=" + goodsStoreId +
-            ", goodsShelfFloor=" + goodsShelfFloor +
-        "}";
-    }
 }

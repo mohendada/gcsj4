@@ -10,15 +10,15 @@ public class code {
     public static void main(String[] args) {
         String url="jdbc:mysql:///warehouse";
         String username="root";
-        String password="lry20031004";
+        String password="123456";
         String moudleName="sys";
-        String mapperLocation="D:\\IDEA\\springtest\\gcsj4supermarket\\src\\main\\resources\\mapper\\"+moudleName;
-        String tables="user";
+        String mapperLocation="D:\\warehouse\\gr\\gcsj4supermarket\\src\\main\\resources\\mapper\\"+moudleName;
+        String tables="shoppingcart";
         FastAutoGenerator.create(url, username, password)
                 .globalConfig(builder -> {
                     builder.author("li") // 设置作者
                             //.enableSwagger() // 开启 swagger 模式
-                            .outputDir("D:\\IDEA\\springtest\\gcsj4supermarket\\src\\main\\java"); // 指定输出目录
+                            .outputDir("D:\\warehouse\\gr\\gcsj4supermarket\\src\\main\\java"); // 指定输出目录
                 })
                 .packageConfig(builder ->
                         builder.parent("com.example.gcsj4supermarket") // 设置父包名

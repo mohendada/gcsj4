@@ -1,21 +1,26 @@
 package com.example.gcsj4supermarket.sys.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import lombok.Data;
+
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author li
  * @since 2024-05-27
  */
+@Data
 public class Employee implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
-
-    private Integer employeeId;
-
+    private Integer id;
+    @TableField(value = "employee_name")
     private String employeeName;
 
     private Integer employeeAge;
@@ -34,12 +39,31 @@ public class Employee implements Serializable {
 
     private Integer employeePermission;
 
-    public Integer getEmployeeId() {
-        return employeeId;
+    public String getEmployeePosition() {
+        return employeePosition;
     }
 
-    public void setEmployeeId(Integer employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployeePosition(String employeePosition) {
+        this.employeePosition = employeePosition;
+    }
+
+    private String employeePosition;
+
+    public Integer getEmployeeSex() {
+        return employeeSex;
+    }
+
+    public void setEmployeeSex(Integer employeeSex) {
+        this.employeeSex = employeeSex;
+    }
+
+    private Integer employeeSex;
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
     public String getEmployeeName() {
         return employeeName;
@@ -108,16 +132,18 @@ public class Employee implements Serializable {
     @Override
     public String toString() {
         return "Employee{" +
-            "employeeId=" + employeeId +
-            ", employeeName=" + employeeName +
-            ", employeeAge=" + employeeAge +
-            ", employeePhoneNumber=" + employeePhoneNumber +
-            ", employeeWorkStatus=" + employeeWorkStatus +
-            ", employeeLfap=" + employeeLfap +
-            ", employeeSickLeave=" + employeeSickLeave +
-            ", employeeDailyWage=" + employeeDailyWage +
-            ", employeeWorkDay=" + employeeWorkDay +
-            ", employeePermission=" + employeePermission +
-        "}";
+                "id=" + id +
+                ", employeeName='" + employeeName + '\'' +
+                ", employeeAge=" + employeeAge +
+                ", employeePhoneNumber='" + employeePhoneNumber + '\'' +
+                ", employeeWorkStatus=" + employeeWorkStatus +
+                ", employeeLfap=" + employeeLfap +
+                ", employeeSickLeave=" + employeeSickLeave +
+                ", employeeDailyWage=" + employeeDailyWage +
+                ", employeeWorkDay=" + employeeWorkDay +
+                ", employeePermission=" + employeePermission +
+                ", employeePosition='" + employeePosition + '\'' +
+                ", employeeSex=" + employeeSex +
+                '}';
     }
 }

@@ -59,7 +59,9 @@ public class User implements Serializable {
     public Integer getUserId() {
         return userId;
     }
-
+    public Integer getId() {
+        return userId;
+    }
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
