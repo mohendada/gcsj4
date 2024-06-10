@@ -10,18 +10,26 @@ import com.example.gcsj4supermarket.sys.service.IShoppingcartService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
  * </p>
  *
- * @author wms
- * @since 2024-06-09
+ * @author li
+ * @since 2024-06-10
  */
 @Service
 public class ShoppingcartServiceImpl extends ServiceImpl<ShoppingcartMapper, Shoppingcart> implements IShoppingcartService {
     @Resource
     private ShoppingcartMapper shoppingcartMapper;
+
+    @Override
+    public List<Shoppingcart> GetShoppingcartListById(Integer id) {
+        return shoppingcartMapper.GetShoppingcartListById(id);
+    }
+
     @Override
     public IPage pageCC(IPage<Shoppingcart> page, Wrapper<Shoppingcart> wrapper) {
         return shoppingcartMapper.pageCC(page,wrapper);

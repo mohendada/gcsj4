@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -26,24 +27,15 @@ import java.util.List;
 
 /**
  * <p>
- * 前端控制器
+ *  前端控制器
  * </p>
  *
- * @author wms
- * @since 2024-06-09
- */
-
-/**
- * <p>
- * 前端控制器
- * </p>
- *
- * @author wms
- * @since 2024-06-04
+ * @author li
+ * @since 2024-06-10
  */
 @Slf4j
 @RestController
-@RequestMapping("/shoppingcart")
+@RequestMapping("/sys/shoppingcart")
 public class ShoppingcartController {
 
     @Autowired
@@ -87,14 +79,14 @@ public class ShoppingcartController {
         return shoppingcartService.removeById(shoppingcart.getId()) ? Result2.suc() : Result2.fail();
     }
 
-    @PostMapping("/listPage")
-    public Result2 listPage() {
-
-        Page<Shoppingcart> page = new Page();
-        LambdaQueryWrapper<Shoppingcart> lambdaQueryWrapper = new LambdaQueryWrapper();
-        IPage result = shoppingcartService.pageCC(page, lambdaQueryWrapper);
-        return Result2.suc(result.getRecords(), result.getTotal());
-    }
+//    @PostMapping("/listPage")
+//    public Result2 listPage() {
+//
+//        Page<Shoppingcart> page = new Page();
+//        LambdaQueryWrapper<Shoppingcart> lambdaQueryWrapper = new LambdaQueryWrapper();
+//        IPage result = shoppingcartService.pageCC(page, lambdaQueryWrapper);
+//        return Result2.suc(result.getRecords(), result.getTotal());
+//    }
 
 
     @PostMapping("/getStoreId")
@@ -156,13 +148,12 @@ public class ShoppingcartController {
 
                 orderMapper.insert(order);
             }
-        }catch (Exception e){
-            log.info("发生错误：{}",e);
-            return Result.fail(40001,"发生错误:"+e.toString());
+        } catch (Exception e) {
+            log.info("发生错误：{}", e);
+            return Result.fail(40001, "发生错误:" + e.toString());
         }
         return Result.success();
     }
-
     /**
      * 计算购物车商品价值
      * @param userid
@@ -186,5 +177,13 @@ public class ShoppingcartController {
             return Result.fail(400,e.getMessage());
         }
         return Result.success(value);
+    }
+
+    @GetMapping("/listPage")
+    public Result<?> listPage(@RequestParam("id") Integer userId) {
+
+        //List<Shoppingcart> shoppingcarts=new ArrayList<>();
+        //shoppingcarts=shoppingcartService.list();
+        return Result.success(shoppingcartService.GetShoppingcartListById(userId));
     }
 }

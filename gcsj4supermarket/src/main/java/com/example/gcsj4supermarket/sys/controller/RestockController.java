@@ -2,6 +2,7 @@ package com.example.gcsj4supermarket.sys.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Controller;
  * @author li
  * @since 2024-05-27
  */
-@Controller
+@RestController
 @RequestMapping("/sys/restock")
 public class RestockController {
 

@@ -6,6 +6,7 @@ import com.example.gcsj4supermarket.sys.entity.Order;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 
@@ -19,6 +20,7 @@ import java.util.List;
  * @author li
  * @since 2024-05-27
  */
+@Mapper
 public interface OrderMapper extends BaseMapper<Order> {
 
     @Insert("INSERT INTO `order` (order_id, order_kind, order_time, order_status, order_name, order_number,order_creater_id,receiving_time) " +
@@ -48,4 +50,10 @@ public interface OrderMapper extends BaseMapper<Order> {
 
     @Delete("delete from `order` where order_id=#{orderId}")
     void deleteOrder(Integer orderId);
+
+    @Select("select * from  `order`  GROUP BY order_time")
+    List<Order> GetAllStatusList();
+
+    @Select("select * from  `order`  where order_time =  #{date}")
+    List<Order> GetOrderListByTime(String date);
 }

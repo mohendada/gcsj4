@@ -6,7 +6,9 @@ import com.example.gcsj4supermarket.sys.entity.Store;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.example.gcsj4supermarket.sys.entity.Order;
 import com.example.gcsj4supermarket.sys.entity.Store;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -22,6 +24,8 @@ import org.apache.ibatis.annotations.Update;
  */
 @Mapper
 public interface StoreMapper extends BaseMapper<Store> {
+
+
     IPage pageCC(IPage<Store> page, @Param(Constants.WRAPPER) Wrapper wrapper);
     IPage pageCC2(IPage<Store> page, @Param(Constants.WRAPPER) Wrapper wrapper);
 

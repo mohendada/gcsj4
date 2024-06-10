@@ -10,7 +10,7 @@ import com.example.gcsj4supermarket.sys.entity.Supplier;
 import com.example.gcsj4supermarket.sys.service.ISupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.stereotype.Controller;
 
 import java.util.HashMap;
 import java.util.List;

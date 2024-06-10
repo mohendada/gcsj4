@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -31,7 +33,8 @@ import java.util.UUID;
 @Slf4j
 @Service
 public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements IGoodsService {
-    @Resource
+
+    @Autowired
     private GoodsMapper goodsMapper;
     @Override
     public IPage pageCC(IPage<Goods> page, Wrapper wrapper) {
@@ -94,5 +97,14 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
             }
         }
         updateGoods(goods);
+    }
+
+    public List<Goods> getGoodsByType(String type)
+    {
+       // List<Goods> goodsList =new ArrayList<>();
+        return goodsMapper.selectByType(type);
+    }
+    public List<Goods> getGoodsByName(String name) {
+        return goodsMapper.selectGoodsByName(name);
     }
 }

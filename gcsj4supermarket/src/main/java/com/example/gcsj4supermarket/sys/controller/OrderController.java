@@ -1,16 +1,23 @@
 package com.example.gcsj4supermarket.sys.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.gcsj4supermarket.common.vo.Result;
+import com.example.gcsj4supermarket.sys.entity.Employee;
 import com.example.gcsj4supermarket.sys.entity.Order;
 import com.example.gcsj4supermarket.sys.service.IOrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -121,4 +128,61 @@ public class OrderController {
         List<Order> orders = orderService.GetByStatus(status);
         return Result.success(orders);
     }
+
+
+
+    @GetMapping("/GetAllStatusList")
+    public Result<?> GetAllStatusList( @RequestParam("pageNo")Long pageNo,
+                                       @RequestParam("pageSize")Long pageSize,
+                                       @RequestParam(defaultValue = "0")Integer createId
+    ){
+
+        LambdaQueryWrapper<Order> wrapper = new LambdaQueryWrapper<>();
+        wrapper.select(Order::getOrderTime, Order::getOrderStatus, Order::getOrderCreaterId); // 选择所有需要的字段
+        wrapper.groupBy(Order::getOrderTime, Order::getOrderStatus, Order::getOrderCreaterId);
+        if(createId !=0 ) {
+            wrapper.eq(Order::getOrderCreaterId, createId);
+        }
+        System.out.println("createId :: "+createId);
+//        LambdaQueryWrapper<Order> wrapper=new LambdaQueryWrapper<>();
+//        wrapper.distinct(true);
+//        wrapper.select(Order::getOrderTime);
+        Page<Order> page=new Page<>(pageNo,pageSize);
+        orderService.page(page,wrapper);
+        //放数据
+        Map<String,Object> data=new HashMap<>();
+        data.put("total",page.getTotal());
+        data.put("rows",page.getRecords());
+        System.out.println("GetAllStatusList");
+        return Result.success(data);
+
+    }
+    @GetMapping("/GetOrderListByTime")
+    public Result<?> GetOrderListByTime(@RequestParam(value = "date")String s)
+    {
+        ZonedDateTime zonedDateTime = ZonedDateTime.parse(s, DateTimeFormatter.ISO_DATE_TIME);
+        System.out.println("GetOrderListByTime:" + zonedDateTime);
+        ZonedDateTime desiredZoneDateTime = zonedDateTime.withZoneSameInstant(java.time.ZoneId.of("Asia/Shanghai"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = desiredZoneDateTime.format(formatter);
+        System.out.println("Date:" + formattedDateTime);
+        return Result.success(orderService.GetOrderListByTime(formattedDateTime));
+    }
+
+    @PutMapping("updateOrderStatus")
+    public Result<?> updateOrderStatus(@RequestParam(value = "date")String s)
+    {
+        ZonedDateTime zonedDateTime = ZonedDateTime.parse(s, DateTimeFormatter.ISO_DATE_TIME);
+        System.out.println("updateOrderStatus:" + zonedDateTime);
+        ZonedDateTime desiredZoneDateTime = zonedDateTime.withZoneSameInstant(java.time.ZoneId.of("Asia/Shanghai"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = desiredZoneDateTime.format(formatter);
+        System.out.println("Date:" + formattedDateTime);
+        List<Order> orders =  orderService.GetOrderListByTime(formattedDateTime);
+        for (Order order : orders) {
+            orderService.updateStatus(order.getOrderId());
+        }
+        return Result.success();
+    }
+
 }

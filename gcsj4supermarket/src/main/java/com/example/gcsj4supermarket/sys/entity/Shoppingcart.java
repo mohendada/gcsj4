@@ -16,8 +16,8 @@ import java.io.Serializable;
  * 
  * </p>
  *
- * @author wms
- * @since 2024-06-09
+ * @author li
+ * @since 2024-06-10
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -39,4 +39,50 @@ public class Shoppingcart implements Serializable {
     @ApiModelProperty(value = "商品名称")
     private String  sgoodsName;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+    public Integer getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(Integer goodsId) {
+        this.goodsId = goodsId;
+    }
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
+    }
+    public String getSgoodsName() {
+        return sgoodsName;
+    }
+
+    public void setSgoodsName(String sgoodsName) {
+        this.sgoodsName = sgoodsName;
+    }
+
+    @Override
+    public String toString() {
+        return "Shoppingcart{" +
+            "id=" + id +
+            ", userId=" + userId +
+            ", goodsId=" + goodsId +
+            ", num=" + num +
+            ", sgoodsName=" + sgoodsName +
+        "}";
+    }
 }

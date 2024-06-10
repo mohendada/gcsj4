@@ -7,11 +7,12 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author li
@@ -22,6 +23,7 @@ import java.io.Serializable;
 @ApiModel(value="Goods对象", description="")
 public class Goods implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "主键")

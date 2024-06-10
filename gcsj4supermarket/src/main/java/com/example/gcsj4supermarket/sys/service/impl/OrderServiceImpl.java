@@ -91,4 +91,17 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     public IPage<Order> getAllOrders(Page<Order> page) {
         return orderMapper.selectOrderPage(page,null);
     }
+
+    @Override
+    public List<Order> GetAllStatusList() {
+        return orderMapper.GetAllStatusList();
+    }
+
+    @Override
+    public List<Order> GetOrderListByTime(String date) {
+        return orderMapper.GetOrderListByTime(date);
+    }
+
+
+
 }

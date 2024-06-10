@@ -22,4 +22,10 @@ public interface UserMapper extends BaseMapper<User> {
     int updateById(User user);
     @Select("select * from user where user_Id = #{userId}")
     User getuserbyNa(User user);
+
+    @Select("select * from user where user_name=#{username}")
+    User getUserByName(String username);
+
+    @Select("select * from user where user_id=#{userId}")
+    User getUserByUId(Integer userId);
 }

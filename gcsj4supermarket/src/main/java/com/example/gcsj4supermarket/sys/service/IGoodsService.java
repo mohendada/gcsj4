@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * <p>
@@ -36,4 +37,9 @@ public interface IGoodsService extends IService<Goods> {
     IPage<Goods> getGoodsPage(Page<Goods> page);
 
     void updateGoods(Goods goods, MultipartFile file) throws IOException;
+
+
+    List<Goods> getGoodsByType(String type);
+
+    List<Goods> getGoodsByName(String name);
 }

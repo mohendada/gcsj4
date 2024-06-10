@@ -26,4 +26,7 @@ public interface IUserService extends IService<User> {
     User getuserbyNa(User user);
 
     void updatePasswordById(User user);
+
+    User getUserByName(String userName);
+    User getUserByUId(Integer userId);
 }

@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("'order'")
+@TableName("`order`")
 public class Order implements Serializable {
 
     @Serial

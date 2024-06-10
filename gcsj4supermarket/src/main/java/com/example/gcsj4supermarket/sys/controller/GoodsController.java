@@ -9,6 +9,7 @@ import com.example.gcsj4supermarket.common.Res2.Result2;
 import com.example.gcsj4supermarket.common.vo.Result;
 import com.example.gcsj4supermarket.sys.entity.Goods;
 import com.example.gcsj4supermarket.sys.service.IGoodsService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.gcsj4supermarket.common.util.AliOssUtil;
@@ -17,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -24,10 +27,10 @@ import java.util.HashMap;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
- * @author li
+ * @author zzuiding
  * @since 2024-05-27
  */
 @RestController
@@ -63,10 +66,8 @@ public class GoodsController {
         IPage<Goods> goodsPage = goodsService.getGoodsPage(page);
         return Result.success(goodsPage);
     }
-
     /**
      * 根据Id查询商品
-     *
      * @param id
      * @return good
      */
@@ -164,7 +165,6 @@ public class GoodsController {
 
     /**
      * 删除商品
-     *
      * @param id
      * @return
      */
@@ -177,7 +177,20 @@ public class GoodsController {
     @PostMapping("/goodStatus")
     public Result<?> GoodStatus(@RequestParam("id") Integer id) {
         goodsService.GoodStatus(id);
-        return Result.success(9999, "修改成功");
+        return  Result.success();
+    }
+    @GetMapping("/getGoodsByType")
+    public Result<?> getGoodsByType(@RequestParam("type") String type ){
+        System.out.println("getGoodsByType1");
+        List<Goods> goodsList =new ArrayList<>();
+        goodsList=goodsService.getGoodsByType(type);
+        System.out.println("getGoodsByType2");
+        return Result.success(goodsList);
     }
 
+
+    @GetMapping("/getGoodsByName")
+    public List<Goods> getGoodsByName(@RequestParam String name) {
+        return goodsService.getGoodsByName(name);
+    }
 }

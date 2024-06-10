@@ -9,15 +9,15 @@ import org.apache.ibatis.annotations.Param;
 import com.example.gcsj4supermarket.sys.entity.Goods;
 import org.apache.ibatis.annotations.*;
 
-import java.io.Serializable;
+import java.util.List;
 
 
 /**
  * <p>
- *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
- * @author li
+ * @author zui
  * @since 2024-05-27
  */
 @Mapper
@@ -34,6 +34,8 @@ public interface GoodsMapper extends BaseMapper<Goods> {
     @Select("select * FROM goods WHERE goods_id = #{id}")
     Goods getGoodsById(Integer id);
 
+//    @Update("update goods " +
+//            "set goods_name=#{goodsName},goods_price=#{goodsPrice},goods_photo=#{goodsPhoto},supplier_id=#{supplierId},goods_status=#{goodsStatus} where goods_Id=#{goodsId}")
     void updateGoods(Goods goods);
 
     @Delete("delete from goods where goods.goods_Id=#{id}")
@@ -47,4 +49,11 @@ public interface GoodsMapper extends BaseMapper<Goods> {
 
     @Select("select  goods_Id from goods where goods_name=#{name}")
     int SelectByName(String orderName);
+
+    @Select(("select * from goods where goods_type = #{type}"))
+    List<Goods> selectByType(String type);
+
+    @Select("select * from goods where goods_name like CONCAT('%', #{name}, '%')")
+    List<Goods> selectGoodsByName(String name);
+
 }

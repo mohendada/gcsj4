@@ -33,4 +33,11 @@ public interface IOrderService extends IService<Order> {
     List<Order> GetByStatus(Integer status);
 
     IPage<Order> getAllOrders(Page<Order> page);
+
+
+
+    List<Order> GetAllStatusList();
+
+    List<Order> GetOrderListByTime(String date);
+
 }
