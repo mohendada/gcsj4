@@ -11,6 +11,7 @@ import com.example.gcsj4supermarket.common.vo.Result;
 import com.example.gcsj4supermarket.sys.entity.Goods;
 import com.example.gcsj4supermarket.sys.entity.Order;
 import com.example.gcsj4supermarket.sys.entity.Shoppingcart;
+import com.example.gcsj4supermarket.sys.mapper.GoodsMapper;
 import com.example.gcsj4supermarket.sys.mapper.OrderMapper;
 import com.example.gcsj4supermarket.sys.service.IGoodsService;
 import com.example.gcsj4supermarket.sys.service.IShoppingcartService;
@@ -53,6 +54,10 @@ public class ShoppingcartController {
 
     @Autowired
     private OrderMapper orderMapper;
+
+    @Autowired
+    private GoodsMapper goodsMapper;
+
     //新增
     @PostMapping("/save")
     public Result2 save(@RequestBody Shoppingcart shoppingcart) {
@@ -131,7 +136,7 @@ public class ShoppingcartController {
 
 
         List<Shoppingcart> shoppingcarts = shoppingcartService.list(queryWrapper);
-        List<Order> orders = new ArrayList<>();
+//        List<Order> orders = new ArrayList<>();
         Order order = new Order();
         try {
             for (Shoppingcart shoppingcart : shoppingcarts) {
@@ -158,5 +163,28 @@ public class ShoppingcartController {
         return Result.success();
     }
 
+    /**
+     * 计算购物车商品价值
+     * @param userid
+     * return value
+     */
+    @Transactional
+    @RequestMapping("/countValue")
+    public Result<?> countValue(@RequestParam("userId") Integer userid){
+        QueryWrapper<Shoppingcart> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", userid);
 
+        List<Shoppingcart> shoppingcarts = shoppingcartService.list(queryWrapper);
+        Goods goods = new Goods();
+        float value = 0;
+        try{
+            for (Shoppingcart shoppingcart : shoppingcarts){
+                goods = goodsMapper.getGoodsById(shoppingcart.getGoodsId());
+                value += goods.getGoodsPrice()*shoppingcart.getNum();
+            }
+        }catch (Exception e){
+            return Result.fail(400,e.getMessage());
+        }
+        return Result.success(value);
+    }
 }
