@@ -19,4 +19,18 @@
         goods_Id, goods_name, goods_price, goods_photo, supplier_id, goods_status, goods_desc, goods_type
     </sql>
 
+    <update id="updateGoods" parameterType="com.example.gcsj4supermarket.sys.entity.Goods">
+        UPDATE goods
+        <set>
+            <if test="goodsName != null and goodsName != ''">goods_name = #{goodsName},</if>
+            <if test="goodsPrice != null">goods_price = #{goodsPrice},</if>
+            <if test="goodsPhoto != null and goodsPhoto != ''">goods_photo = #{goodsPhoto},</if>
+            <if test="supplierId != null">supplier_id = #{supplierId},</if>
+            <if test="goodsStatus != null">goods_status = #{goodsStatus},</if>
+            <if test="goodsType != null and goodsType != ''">goods_type= #{goodsType}</if>
+            <if test="goodsDesc != null and goodsDesc != ''">goods_desc = #{goodsDesc}</if>
+        </set>
+        WHERE goods_id = #{goodsId}
+    </update>
+
 </mapper>

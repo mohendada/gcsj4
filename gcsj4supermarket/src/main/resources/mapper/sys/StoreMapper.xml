@@ -25,4 +25,16 @@
         goods_shelf_id, goods_id, goods_number, goods_kind, goods_store_id, goods_shelf_floor,
     </sql>
 
+    <update id="update">
+        update store
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

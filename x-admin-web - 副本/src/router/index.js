@@ -109,13 +109,6 @@ export const asyncRoutes = [
       },
     ]
   },
-
-
-
-
-
-
-
   {
     path: '/sys',
     component: Layout,
@@ -129,6 +122,38 @@ export const asyncRoutes = [
         name: 'leave',
         component: () => import('@/views/sys/leave'),
         meta: { title: '请假申请', icon: 'userManage' }
+      }
+    ]
+  },
+  {
+    path: '/sys',
+    component: Layout,
+    redirect: '/sys/goods',
+    name: 'goodManage',
+    meta: {title: '商品管理',icon: 'el-icon-s-help',roles: ['employee']},
+    alwaysShow: true,
+    children: [
+      {
+        path: 'goodsList',
+        name: 'goodsList',
+        component:()=> import('@/views/sys/goods'),
+        meta: {title: "商品浏览",icon: 'userManage'}
+      }
+    ]
+  },
+  {
+    path: '/sys',
+    component: Layout,
+    redirect: '/sys/order',
+    name: 'orderManage',
+    meta: {title: '订单管理', icon: 'el-icon-s-help', roles: ['employee']},
+    alwaysShow: true,
+    children: [
+      {
+        path: 'orderList',
+        name: 'orderList',
+        component: () => import('@/views/sys/order.vue'),
+        meta: {title: "订单浏览", icon: 'orderManage'}
       }
     ]
   },
