@@ -179,4 +179,5 @@ public class GoodsController {
         goodsService.GoodStatus(id);
         return Result.success(9999, "修改成功");
     }
+
 }
